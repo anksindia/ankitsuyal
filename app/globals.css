@@ -1,3 +1,13 @@
 @import "tailwindcss";
 
 
+:root {
+  --bg-color: #000;
+  --text-color: #fff;
+}
+
+/* Apply globally */
+html, body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}

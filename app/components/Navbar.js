@@ -1,15 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Code2, Briefcase } from "lucide-react";
 import { FaEnvelope } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { LaptopMinimal } from "lucide-react"; 
+import gsap from "gsap";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shrink, setShrink] = useState(false);
   const pathname = usePathname();
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +23,16 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (menuOpen && menuRef.current) {
+      gsap.fromTo(
+        menuRef.current,
+        { y: -20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
+      );
+    }
+  }, [menuOpen]);
+
   return (
     <nav
       className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ease-in-out
@@ -27,16 +41,10 @@ const Navbar = () => {
     >
       <div className="flex justify-between items-center">
         {/* Brand / Logo */}
-        <Link href="/" className="flex items-center  text-white font-bold text-xl">
-          <img
-            src="/logo.svg"
-            alt="Ankit"
-            className="h-8 w-auto object-contain"
-          />
+        <Link href="/" className="flex items-center text-white font-bold text-xl">
+          <img src="/logo.svg" alt="Ankit" className="h-8 w-auto object-contain" />
           {!shrink && (
-            <span className="hidden sm:inline-block text-white text-xl font-bold">
-              nkit
-            </span>
+            <span className="hidden sm:inline-block text-white text-xl font-bold">nkit</span>
           )}
         </Link>
 
@@ -51,9 +59,7 @@ const Navbar = () => {
               <Link
                 href={item.path}
                 className={`transition hover:text-white/70 ${
-                  pathname === item.path
-                    ? "font-bold underline underline-offset-4"
-                    : ""
+                  pathname === item.path ? "font-bold underline underline-offset-4" : ""
                 }`}
               >
                 {item.label}
@@ -65,7 +71,7 @@ const Navbar = () => {
         {/* Contact Button */}
         <Link
           href="/contact"
-          className="hidden md:flex items-center gap-2  text-white text-sm px-4 py-2 rounded-full hover:opacity-90 active:scale-95 transition-all"
+          className="hidden md:flex items-center gap-2 text-white text-sm px-4 py-2 rounded-full hover:opacity-90 active:scale-95 transition-all"
         >
           <FaEnvelope size={16} />
           {!shrink && <span className="hidden sm:inline">Contact</span>}
@@ -84,23 +90,40 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="absolute top-full mt-4 left-0 w-full bg-white/10 backdrop-blur-md rounded-xl p-6 md:hidden">
+        <motion.div
+          ref={menuRef}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="absolute top-full mt-4 left-0 w-full bg-black backdrop-blur-md rounded-xl p-6 md:hidden"
+        >
           <ul className="flex flex-col gap-4 text-white">
-            <li><Link href="/skills" onClick={() => setMenuOpen(false)}>Skills</Link></li>
-            <li><Link href="/projects" onClick={() => setMenuOpen(false)}>Projects</Link></li>
-            <li><Link href="/experience" onClick={() => setMenuOpen(false)}>Experience</Link></li>
-            <li>
-              <Link
-                href="/contact"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2"
-              >
-                <FaEnvelope size={16} />
-                <span>Contact</span>
+            <motion.li whileHover={{ x: 5 }} className="flex items-center gap-3">
+              <Code2 size={18} />
+              <Link href="/skills" onClick={() => setMenuOpen(false)}>
+                Skills
               </Link>
-            </li>
+            </motion.li>
+            <motion.li whileHover={{ x: 5 }} className="flex items-center gap-3">
+              <LaptopMinimal size={18} />
+              <Link href="/projects" onClick={() => setMenuOpen(false)}>
+                Projects
+              </Link>
+            </motion.li>
+            <motion.li whileHover={{ x: 5 }} className="flex items-center gap-3">
+              <Briefcase size={18} />
+              <Link href="/experience" onClick={() => setMenuOpen(false)}>
+                Experience
+              </Link>
+            </motion.li>
+            <motion.li whileHover={{ x: 5 }} className="flex items-center gap-3">
+              <FaEnvelope size={16} />
+              <Link href="/contact" onClick={() => setMenuOpen(false)}>
+                Contact
+              </Link>
+            </motion.li>
           </ul>
-        </div>
+        </motion.div>
       )}
     </nav>
   );

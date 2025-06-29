@@ -23,7 +23,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative min-h-screen text-white flex items-center justify-center px-6 sm:px-8 md:px-10 overflow-hidden bg-gradient-to-b from-[#0d1117] via-[#0f172a] to-[#020617]">
+    <section className="relative min-h-screen text-white flex items-center justify-center px-6 sm:px-8 md:px-10 overflow-hidden bg-gradient-to-b from-[#000101] via-[#000000] to-[#000101]">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f15_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f15_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] pointer-events-none z-0" />
       </div>
@@ -37,7 +37,7 @@ const HeroSection = () => {
           transition={{ duration: 1.4, ease: "easeOut" }}
           tabIndex={0}
           aria-label="Hero headline: Hey there, I'm Ankit Suyal"
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-blue-400 via-blue-900 to-blue-400 bg-clip-text text-transparent animate-text-glow"
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-gray-500 via-gray-600 to-gray-500 bg-clip-text text-transparent animate-text-glow"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

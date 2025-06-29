@@ -48,7 +48,7 @@ export default function Footer() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true }}
-      className="w-full bg-[#020718] pt-4"
+      className="w-full bg-black pt-4"
     >
       {/* Simulated top border  */}
       <div className="w-full">
