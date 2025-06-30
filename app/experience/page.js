@@ -16,7 +16,7 @@ const ExperiencePage = () => {
       setActiveIndex((prev) => (prev + 1) % screenshots.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, screenshots.length]); // ✅ FIXED
 
   return (
     <div className="min-h-screen bg-black text-white px-4 md:px-16 py-10 relative">
@@ -47,7 +47,7 @@ const ExperiencePage = () => {
             springdalesschoolalmora.com <FiExternalLink />
           </a>
           <p className="mt-3 text-gray-300">
-            Led the full-stack development and management of the school's official website, with CBSE compliance,
+            Led the full-stack development and management of the school&apos;s official website, with CBSE compliance,
             SEO optimization, mobile-first design, and ongoing event/content updates.
           </p>
         </div>
