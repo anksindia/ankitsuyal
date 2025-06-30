@@ -36,12 +36,12 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, ease: "easeOut" }}
           tabIndex={0}
-          aria-label="Hero headline: Hey there, I'm Ankit Suyal"
+          aria-label="Hero headline: Hey there, I&apos;m Ankit Suyal"
           className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-gray-500 via-gray-600 to-gray-500 bg-clip-text text-transparent animate-text-glow"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          Hey there,<br className="hidden sm:block" />I'm<br />Ankit Suyal
+          Hey there,<br className="hidden sm:block" />I&apos;m<br />Ankit Suyal
         </motion.h1>
 
 

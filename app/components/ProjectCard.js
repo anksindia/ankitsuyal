@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaGithub } from "react-icons/fa";
 import { motion } from "framer-motion";
 import gsap from "gsap";
+import Image from "next/image";
 
 const MAX_DESC_LENGTH = 160;
 
@@ -56,8 +57,10 @@ const ProjectCard = ({ title, description, tech, images = [], sourceCode }) => {
           onClick={() => setFullscreen(false)}
           className="fixed inset-0 z-[9999] bg-black bg-opacity-90 flex items-center justify-center"
         >
-          <img
+          <Image
             src={images[currentImg]}
+            width={400}
+            height={300}
             alt="fullscreen"
             className="max-w-[90vw] max-h-[90vh] object-contain rounded-xl"
           />
@@ -71,8 +74,10 @@ const ProjectCard = ({ title, description, tech, images = [], sourceCode }) => {
       >
         {/* Image Slider */}
         <div className="relative w-full h-44 rounded-xl overflow-hidden mb-4 group">
-          <img
+          <Image
             src={images[currentImg]}
+            width={400}
+            height={300}
             alt={`Slide ${currentImg + 1}`}
             className="w-full h-full object-cover cursor-pointer"
             onClick={() => setFullscreen(true)}
@@ -122,9 +127,8 @@ const ProjectCard = ({ title, description, tech, images = [], sourceCode }) => {
         <div className="flex justify-between items-center pt-3">
           <button
             onClick={() => setAutoPlay((prev) => !prev)}
-            className={`text-xs px-3 py-1 rounded-full ${
-              autoPlay ? "bg-blue-800 text-white" : "bg-gray-700 text-gray-300"
-            }`}
+            className={`text-xs px-3 py-1 rounded-full ${autoPlay ? "bg-blue-800 text-white" : "bg-gray-700 text-gray-300"
+              }`}
           >
             {autoPlay ? "Slideshow" : "Paused"}
           </button>

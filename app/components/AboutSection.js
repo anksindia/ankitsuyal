@@ -53,7 +53,7 @@ const AboutSection = () => {
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <h3 className="text-2xl md:text-3xl font-semibold">Where I'm From</h3>
+        <h3 className="text-2xl md:text-3xl font-semibold">Where I&apos;m From</h3>
         <p className="text-gray-300 text-sm md:text-base leading-relaxed">
           Born in the scenic hills of Almora, Uttarakhand. A place that keeps me grounded while <br />I build for the future.
         </p>

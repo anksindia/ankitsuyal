@@ -30,7 +30,7 @@ const ExperiencePage = () => {
         <div className="mb-12">
           <h1 className="text-5xl font-extrabold text-blue-400 mb-4">Experience</h1>
           <p className="text-lg text-gray-300 max-w-3xl leading-relaxed">
-            Here's a brief overview of my recent work, freelance experience, and academic journey.
+            Here&apos;s a brief overview of my recent work, freelance experience, and academic journey.
           </p>
         </div>
 

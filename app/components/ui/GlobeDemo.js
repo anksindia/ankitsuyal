@@ -28,7 +28,7 @@ const globeConfig = {
 };
 
 export const GlobeDemo = ({
-  title = "Let's connect the world",
+  title = "Let&apos;s connect the world",
   subtitle = "Ping me from anywhere!",
 }) => {
   return (
