@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-// Utility
 function cn(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -29,8 +28,7 @@ export const PinContainer = ({
   };
 
   return (
-    <Link
-      href={href || "/"}
+    <div
       className={cn(
         "relative group/pin z-[99] isolate cursor-pointer",
         containerClassName
@@ -38,53 +36,56 @@ export const PinContainer = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {/* 3D wrapper */}
-      <div
-        style={{
-          perspective: "1000px",
-          transform: "rotateX(70deg) translateZ(0deg)",
-        }}
-        className="absolute left-1/2 top-1/2 ml-[0.09375rem] mt-4 -translate-x-1/2 -translate-y-1/2"
+      <Link
+        href={href || "/"}
+        target="_blank"
+        className="block"
       >
         <div
-          style={{ transform }}
-          className="absolute left-1/2 p-4 top-1/2 flex justify-center items-center rounded-2xl shadow-[0_8px_16px_rgb(0_0_0/0.4)] bg-black border border-white/[0.1] group-hover/pin:border-white/[0.2] transition duration-700 overflow-hidden"
+          style={{
+            perspective: "1000px",
+            transform: "rotateX(70deg) translateZ(0deg)",
+          }}
+          className="absolute left-1/2 top-1/2 ml-[0.09375rem] mt-4 -translate-x-1/2 -translate-y-1/2"
         >
           <div
-            className={cn(
-              "relative z-[99] w-80 h-60 rounded-xl overflow-hidden",
-              className
-            )}
+            style={{ transform }}
+            className="absolute left-1/2 p-4 top-1/2 flex justify-center items-center rounded-2xl shadow-[0_8px_16px_rgb(0_0_0/0.4)] bg-black border border-white/[0.1] group-hover/pin:border-white/[0.2] transition duration-700 overflow-hidden"
           >
-            {/* Project Image */}
-            <Image
-              src={imageSrc}
-              alt={title}
-              width={400}
-              height={300}
-              className="object-cover w-full h-full rounded-xl"
-            />
-
-            {/* Title */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 px-3 py-1 rounded-full text-white text-sm font-medium z-[99]"
+            <div
+              className={cn(
+                "relative z-[99] w-80 h-60 rounded-xl overflow-hidden",
+                className
+              )}
             >
-              {title}
-            </motion.div>
+              <Image
+                src={imageSrc}
+                alt={title}
+                width={400}
+                height={300}
+                className="object-cover w-full h-full rounded-xl"
+              />
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 px-3 py-1 rounded-full text-white text-sm font-medium z-[99]"
+              >
+                {title}
+              </motion.div>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
 
       {/* Floating beam & glow */}
-      <PinPerspective title={title} href={href} />
-    </Link>
+      <PinPerspective title={title} />
+    </div>
   );
 };
 
-export const PinPerspective = ({ title, href }) => {
+export const PinPerspective = ({ title }) => {
   return (
     <motion.div
       className={cn(
@@ -93,21 +94,15 @@ export const PinPerspective = ({ title, href }) => {
       )}
     >
       <div className="w-full h-full -mt-7 flex-none inset-0">
-        {/* Floating Label */}
         <div className="absolute top-0 inset-x-0 flex justify-center">
-          <Link
-            href={href}
-            target="_blank"
-            className="relative flex space-x-2 items-center z-[100] rounded-full bg-zinc-950 py-0.5 px-4 ring-1 ring-white/10"
-          >
+          <div className="relative flex space-x-2 items-center z-[100] rounded-full bg-zinc-950 py-0.5 px-4 ring-1 ring-white/10">
             <span className="relative z-20 text-white text-xs font-bold inline-block py-0.5">
               {title}
             </span>
             <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover/btn:opacity-40"></span>
-          </Link>
+          </div>
         </div>
 
-        {/* Floating Rings */}
         <div
           style={{
             perspective: "1000px",
@@ -126,7 +121,6 @@ export const PinPerspective = ({ title, href }) => {
           ))}
         </div>
 
-        {/* Beam */}
         <>
           <motion.div className="absolute right-1/2 bottom-1/2 bg-gradient-to-b from-transparent to-cyan-500 translate-y-[14px] w-px h-32 blur-[2px]" />
           <motion.div className="absolute right-1/2 bottom-1/2 bg-gradient-to-b from-transparent to-cyan-500 translate-y-[14px] w-px h-32" />

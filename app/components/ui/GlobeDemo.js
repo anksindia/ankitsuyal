@@ -53,3 +53,5 @@ export const GlobeDemo = ({
     </div>
   );
 };
+
+export default GlobeDemo;
