@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Ankit Suyal - Portfolio",
-  description: "this next js app is built by ankisindia(github) for their portofolio",
+  description: "A modern and responsive portfolio website built by Ankit Suyal (ankisindia on GitHub), showcasing skills, projects, and professional experience.",
 };
 
 export default function RootLayout({ children }) {
