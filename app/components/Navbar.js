@@ -8,6 +8,7 @@ import { FaEnvelope } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { LaptopMinimal } from "lucide-react"; 
 import gsap from "gsap";
+import Image from "next/image";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -42,7 +43,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center">
         {/* Brand / Logo */}
         <Link href="/" className="flex items-center text-white font-bold text-xl">
-          <img src="/logo.svg" alt="Ankit" className="h-8 w-auto object-contain" />
+          <Image src="/logo.svg" alt="Ankit" width={32} height={32} priority />
           {!shrink && (
             <span className="hidden sm:inline-block text-white text-xl font-bold">nkit</span>
           )}

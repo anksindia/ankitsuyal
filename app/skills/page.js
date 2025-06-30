@@ -31,6 +31,12 @@ const languages = [
     src: "/assets/skills/cpp.svg",
   },
   {
+    name: "C",
+    about: "A foundational procedural programming language widely used in systems programming, embedded systems, and operating system development.",
+    category: "Languages - Common in low-level, performance-critical, and hardware-near programming.",
+    src: "/assets/skills/c.svg",
+  },
+  {
     name: "SQL",
     about: "A domain-specific language for managing and querying relational databases.",
     category: "Languages - Essential for backend data operations and reporting.",
@@ -186,6 +192,36 @@ const tools = [
     about: "A collaborative interface design and prototyping tool.",
     category: "Tools & Utilities - Used for UI/UX design workflows.",
     src: "/assets/skills/figma.svg",
+  }, {
+    name: "VSCode",
+    about: "A lightweight yet powerful source code editor developed by Microsoft, with built-in support for debugging, Git, and extensions.",
+    category: "Tools - Code editors and development environments.",
+    src: "/assets/skills/vscode.svg",
+  }, {
+    name: "Postman",
+    about: "A popular collaboration platform for API development, testing, and debugging with a user-friendly interface and automation support.",
+    category: "Tools - API testing and development utilities.",
+    src: "/assets/skills/postman.svg",
+  }, {
+    name: "Nginx",
+    about: "A high-performance web server and reverse proxy known for its speed, stability, and low resource usage, often used in scalable web applications.",
+    category: "Tools - Web servers and networking infrastructure.",
+    src: "/assets/skills/nginx.svg",
+  }, {
+    name: "WordPress",
+    about: "A widely used open-source content management system (CMS) for creating websites and blogs with ease, offering extensive themes and plugins.",
+    category: "Tools - CMS and website development platforms.",
+    src: "/assets/skills/wordpress.svg",
+  }, {
+    name: "Adobe Photoshop",
+    about: "An industry-standard software for image editing, graphic design, and digital art, known for its powerful tools and layer-based editing system.",
+    category: "Tools - Image editing and graphic design software.",
+    src: "/assets/skills/adobe-photoshop.svg",
+  }, {
+    name: "Adobe Premiere Pro",
+    about: "A professional video editing software used for film, TV, and web content creation, offering powerful editing tools and timeline-based workflow.",
+    category: "Tools - Video editing and production software.",
+    src: "/assets/skills/adobe-premiere-pro.svg",
   }
 ];
 
@@ -235,57 +271,57 @@ const softSkills = [
 export default function Page() {
   return (
     <div >
-      <TextHoverEffect/>
+      <TextHoverEffect />
       <div className=" py-16 px-4 sm:px-8 bg-[#000101] text-white">
-      <TracingBeam className="px-4 sm:px-8">
-      <div className="min-h-screen py-16 bg-[#000101] text-white">
-        <h2 className="flex items-center gap-2 text-xl font-semibold">
-          <Code2 size={20} /> Languages
-        </h2>
-        <AnimatedComment comments={languages} autoplay />
+        <TracingBeam className="px-4 sm:px-8">
+          <div className="min-h-screen py-16 bg-[#000101] text-white">
+            <h2 className="flex items-center gap-2 text-xl font-semibold">
+              <Code2 size={20} /> Languages
+            </h2>
+            <AnimatedComment comments={languages} autoplay />
 
-        <h2 className="flex items-center gap-2 text-xl font-semibold">
-          <Paintbrush size={20} /> Frontend
-        </h2>
-        <AnimatedComment comments={frontend} autoplay />
+            <h2 className="flex items-center gap-2 text-xl font-semibold">
+              <Paintbrush size={20} /> Frontend
+            </h2>
+            <AnimatedComment comments={frontend} autoplay />
 
-        <h2 className="flex items-center gap-2 text-xl font-semibold">
-          <Server size={20} /> Backend
-        </h2>
-        <AnimatedComment comments={backend} autoplay />
+            <h2 className="flex items-center gap-2 text-xl font-semibold">
+              <Server size={20} /> Backend
+            </h2>
+            <AnimatedComment comments={backend} autoplay />
 
-        <h2 className="flex items-center gap-2 text-xl font-semibold">
-          <Database size={20} /> Databases
-        </h2>
-        <AnimatedComment comments={databases} autoplay />
+            <h2 className="flex items-center gap-2 text-xl font-semibold">
+              <Database size={20} /> Databases
+            </h2>
+            <AnimatedComment comments={databases} autoplay />
 
-        <h2 className="flex items-center gap-2 text-xl font-semibold">
-          <Cloud size={20} /> Deployment & Cloud Services
-        </h2>
-        <AnimatedComment comments={cloudDeployment} autoplay />
+            <h2 className="flex items-center gap-2 text-xl font-semibold">
+              <Cloud size={20} /> Deployment & Cloud Services
+            </h2>
+            <AnimatedComment comments={cloudDeployment} autoplay />
 
-        <h2 className="flex items-center gap-2 text-xl font-semibold">
-          <GitBranch size={20} /> Version Control & Collaboration
-        </h2>
-        <AnimatedComment comments={versionControl} autoplay />
+            <h2 className="flex items-center gap-2 text-xl font-semibold">
+              <GitBranch size={20} /> Version Control & Collaboration
+            </h2>
+            <AnimatedComment comments={versionControl} autoplay />
 
-        <h2 className="flex items-center gap-2 text-xl font-semibold">
-          <Wrench size={20} /> Tools & Utilities
-        </h2>
-        <AnimatedComment comments={tools} autoplay />
+            <h2 className="flex items-center gap-2 text-xl font-semibold">
+              <Wrench size={20} /> Tools & Utilities
+            </h2>
+            <AnimatedComment comments={tools} autoplay />
 
-        <h2 className="flex items-center gap-2 text-xl font-semibold">
-          <FlaskConical size={20} /> Testing Tools
-        </h2>
-        <AnimatedComment comments={testing} autoplay />
+            <h2 className="flex items-center gap-2 text-xl font-semibold">
+              <FlaskConical size={20} /> Testing Tools
+            </h2>
+            <AnimatedComment comments={testing} autoplay />
 
-        <h2 className="flex items-center gap-2 text-xl font-semibold">
-          <Users size={20} /> Soft Skills
-        </h2>
-        <AnimatedComment comments={softSkills} autoplay />
+            <h2 className="flex items-center gap-2 text-xl font-semibold">
+              <Users size={20} /> Soft Skills
+            </h2>
+            <AnimatedComment comments={softSkills} autoplay />
+          </div>
+        </TracingBeam>
       </div>
-    </TracingBeam>
-    </div>
     </div>
   );
 }

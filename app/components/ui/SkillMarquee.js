@@ -3,9 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useMemo, useEffect, useRef, useState } from "react";
-import { LaptopMinimal } from "lucide-react"; 
+import { LaptopMinimal } from "lucide-react";
 import gsap from "gsap";
-import ColourfulText from "./ColourfulText";
 
 const skillImages = [
   "/assets/skills/python.svg",
@@ -39,7 +38,6 @@ export default function SkillMarquee() {
   const subtextRef = useRef(null);
   const headingContainerRef = useRef(null);
   const [typedText, setTypedText] = useState("");
-
   const fullText = "My Builds";
 
   useEffect(() => {
@@ -61,7 +59,6 @@ export default function SkillMarquee() {
       );
     }
 
-    // Modern text animation for "My Skills"
     if (titleRef.current) {
       gsap.fromTo(
         titleRef.current,
@@ -71,27 +68,29 @@ export default function SkillMarquee() {
           y: 0,
           duration: 1,
           ease: "elastic.out(1, 0.5)",
-          delay: 0.5
+          delay: 0.5,
         }
       );
 
-      // Add subtle continuous gradient animation
       gsap.to(titleRef.current, {
         backgroundPosition: "100% 50%",
         duration: 8,
         ease: "none",
-        repeat: -1
+        repeat: -1,
       });
     }
   }, []);
 
   return (
-   <div className="relative overflow-hidden bg-gray-950 text-white min-h-[30vh] sm:min-h-[40vh] md:min-h-[50vh] max-h-[50vh] sm:max-h-[60vh] md:max-h-[70vh] flex items-center justify-center">
+    <div className="relative overflow-hidden bg-gray-950 text-white min-h-[30vh] sm:min-h-[40vh] md:min-h-[50vh] max-h-[50vh] sm:max-h-[60vh] md:max-h-[70vh] flex items-center justify-center">
 
+      {/* Top and bottom gradient fade */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#000101] to-transparent z-30 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#000101] to-transparent z-30 pointer-events-none" />
 
+      {/* Background + overlay - z-0 only */}
       <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Scrolling skill icons */}
         <div
           className="flex gap-6"
           style={{
@@ -134,24 +133,24 @@ export default function SkillMarquee() {
             </motion.div>
           ))}
         </div>
+
+        {/* ✅ FIXED: This overlay is scoped to background only */}
+        <div className="absolute inset-0 backdrop-blur-sm bg-black/40" />
       </div>
 
-      <div className="absolute inset-0 z-10 backdrop-blur-sm bg-black/40" />
-
+      {/* Title + Subtitle */}
       <div ref={headingContainerRef} className="relative z-30 text-center px-4">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide flex items-center justify-center gap-2">
           <span className="w-8 h-8 text-transparent bg-gradient-to-r from-gray-700 via-gray-600 to-gray-400 bg-clip-text">
             <LaptopMinimal className="text-gray-200 w-8 h-8" />
           </span>
-
           <span
             ref={titleRef}
-            className="inline-block text-white  bg-clip-text  bg-[length:200%_100%]"
+            className="inline-block text-white bg-clip-text bg-[length:200%_100%]"
           >
-           PROJECTS
+            PROJECTS
           </span>
         </h2>
-
         <p
           ref={subtextRef}
           className="mt-3 text-sm sm:text-base bg-gradient-to-r from-slate-300 via-gray-400 to-gray-100 bg-clip-text text-transparent opacity-90 tracking-wide"

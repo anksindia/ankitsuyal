@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const AboutSection = () => {
   return (
-    <div className="relative z-10 bg-black py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div className="relative z-10 bg-black py-24 px-4 sm:px-6 lg:px-8 overflow-visible">
   {/* Content */}
   <div className="relative z-10 mx-auto w-full max-w-7xl space-y-20">
     {/* Section Title */}

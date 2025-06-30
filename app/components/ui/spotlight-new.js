@@ -26,9 +26,9 @@ export const Spotlight = ({
   const g2 = isMobile ? gradientSecondMobile : gradientSecond;
   const g3 = isMobile ? gradientThirdMobile : gradientThird;
 
-  const w = isMobile ? width * 0.5 : width;
-  const h = isMobile ? height * 0.6 : height;
-  const sw = isMobile ? smallWidth * 0.6 : smallWidth;
+  const w = isMobile ? width * 0.8 : width;
+  const h = isMobile ? height * 0.85 : height;
+  const sw = isMobile ? smallWidth * 0.5 : smallWidth;
 
   return (
     <motion.div
