@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -8,9 +8,9 @@ import Image from "next/image";
 const AnimatedComment = ({ comments, autoplay = false }) => {
   const [active, setActive] = useState(0);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setActive((prev) => (prev + 1) % comments.length);
-  };
+  }, [comments.length]);
 
   const handlePrev = () => {
     setActive((prev) => (prev - 1 + comments.length) % comments.length);
@@ -23,7 +23,7 @@ const AnimatedComment = ({ comments, autoplay = false }) => {
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, handleNext]);
 
   const randomRotateY = () => Math.floor(Math.random() * 21) - 10;
 
@@ -59,14 +59,12 @@ const AnimatedComment = ({ comments, autoplay = false }) => {
                 className="absolute inset-0 flex items-center justify-center"
               >
                 <div className="relative h-full w-full rounded-full overflow-hidden backdrop-blur-xl border border-white/10 shadow-inner shadow-black/30">
-                  {/* Glow background */}
                   <Image
                     src={comment.src}
                     alt="blur"
                     fill
                     className="absolute object-cover blur-lg scale-125 opacity-20 z-0"
                   />
-                  {/* Logo */}
                   <Image
                     src={comment.src}
                     alt={comment.name}
@@ -90,9 +88,7 @@ const AnimatedComment = ({ comments, autoplay = false }) => {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="max-w-xl"
         >
-          <h3 className="text-xl font-semibold text-white">
-            {comments[active].name}
-          </h3>
+          <h3 className="text-xl font-semibold text-white">{comments[active].name}</h3>
           <p className="text-sm text-gray-400 mt-1">{comments[active].category}</p>
           <motion.p className="mt-4 text-sm text-gray-300 leading-relaxed px-4 sm:px-6">
             {comments[active].about.split(" ").map((word, index) => (
