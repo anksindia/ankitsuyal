@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const ColourfulText = ({ text }) => {
-  const baseColors = [
-    "#83B320", "#2FC36A", "#2AA9D2", "#0470CA", "#6B0AFF",
-    "#B700DA", "#DA00AB", "#E6405C", "#E8623F", "#F9812F",
-  ];
+// ✅ Moved outside to avoid being a changing dependency
+const baseColors = [
+  "#83B320", "#2FC36A", "#2AA9D2", "#0470CA", "#6B0AFF",
+  "#B700DA", "#DA00AB", "#E6405C", "#E8623F", "#F9812F",
+];
 
+const ColourfulText = ({ text }) => {
   const [currentColors, setCurrentColors] = useState(baseColors);
   const [cycle, setCycle] = useState(0);
 
@@ -15,10 +16,10 @@ const ColourfulText = ({ text }) => {
     const interval = setInterval(() => {
       const shuffled = [...baseColors].sort(() => 0.5 - Math.random());
       setCurrentColors(shuffled);
-      setCycle(prev => prev + 1);
+      setCycle((prev) => prev + 1);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, []); // ✅ No warning now
 
   return (
     <>

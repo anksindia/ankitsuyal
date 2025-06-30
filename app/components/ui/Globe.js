@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Canvas, useThree, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -11,17 +11,6 @@ extend({ ThreeGlobe });
 
 const RING_PROPAGATION_SPEED = 3;
 const cameraZ = 300;
-
-function hexToRgb(hex) {
-  const shorthand = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthand, (m, r, g, b) => r + r + g + g + b + b);
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
-}
 
 function genRandomNumbers(min, max, count) {
   const arr = [];
@@ -37,22 +26,26 @@ const GlobeInner = ({ globeConfig, data }) => {
   const groupRef = useRef();
   const [initialized, setInitialized] = useState(false);
 
-  const defaultProps = {
-    pointSize: 1,
-    atmosphereColor: "#ffffff",
-    showAtmosphere: true,
-    atmosphereAltitude: 0.1,
-    polygonColor: "rgba(255,255,255,0.7)",
-    globeColor: "#1d072e",
-    emissive: "#000000",
-    emissiveIntensity: 0.1,
-    shininess: 0.9,
-    arcTime: 2000,
-    arcLength: 0.9,
-    rings: 1,
-    maxRings: 3,
-    ...globeConfig
-  };
+  // ✅ Memoize defaultProps to avoid dependency warnings
+  const defaultProps = useMemo(
+    () => ({
+      pointSize: 1,
+      atmosphereColor: "#ffffff",
+      showAtmosphere: true,
+      atmosphereAltitude: 0.1,
+      polygonColor: "rgba(255,255,255,0.7)",
+      globeColor: "#1d072e",
+      emissive: "#000000",
+      emissiveIntensity: 0.1,
+      shininess: 0.9,
+      arcTime: 2000,
+      arcLength: 0.9,
+      rings: 1,
+      maxRings: 3,
+      ...globeConfig,
+    }),
+    [globeConfig]
+  );
 
   useEffect(() => {
     if (!globeRef.current && groupRef.current) {
@@ -69,7 +62,7 @@ const GlobeInner = ({ globeConfig, data }) => {
     material.emissive = new THREE.Color(defaultProps.emissive);
     material.emissiveIntensity = defaultProps.emissiveIntensity;
     material.shininess = defaultProps.shininess;
-  }, [initialized, globeConfig]);
+  }, [initialized, defaultProps]);
 
   useEffect(() => {
     if (!globeRef.current || !initialized || !data) return;
@@ -81,14 +74,14 @@ const GlobeInner = ({ globeConfig, data }) => {
         order: arc.order,
         color: arc.color,
         lat: arc.startLat,
-        lng: arc.startLng
+        lng: arc.startLng,
       });
       points.push({
         size: defaultProps.pointSize,
         order: arc.order,
         color: arc.color,
         lat: arc.endLat,
-        lng: arc.endLng
+        lng: arc.endLng,
       });
     }
 
@@ -131,27 +124,27 @@ const GlobeInner = ({ globeConfig, data }) => {
       .ringColor(() => defaultProps.polygonColor)
       .ringMaxRadius(defaultProps.maxRings)
       .ringPropagationSpeed(RING_PROPAGATION_SPEED)
-      .ringRepeatPeriod(
-        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
-      );
-  }, [initialized, data]);
+      .ringRepeatPeriod((defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings);
+  }, [initialized, data, defaultProps]);
 
   useEffect(() => {
     if (!globeRef.current || !initialized || !data) return;
 
     const interval = setInterval(() => {
       const randomIndexes = genRandomNumbers(0, data.length, Math.floor(data.length * 0.8));
-      const ringsData = data.filter((_, i) => randomIndexes.includes(i)).map(d => ({
-        lat: d.startLat,
-        lng: d.startLng,
-        color: d.color
-      }));
+      const ringsData = data
+        .filter((_, i) => randomIndexes.includes(i))
+        .map(d => ({
+          lat: d.startLat,
+          lng: d.startLng,
+          color: d.color,
+        }));
       globeRef.current.ringsData(ringsData);
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [initialized, data]);
-
+  }, [initialized, data, defaultProps]);
+  
   return <group ref={groupRef} />;
 };
 
@@ -161,7 +154,7 @@ const WebGLRendererConfig = () => {
     gl.setPixelRatio(window.devicePixelRatio);
     gl.setSize(size.width, size.height);
     gl.setClearColor(0xffaaff, 0);
-  }, []);
+  }, [gl, size]); // ✅ Fix dependency array
   return null;
 };
 

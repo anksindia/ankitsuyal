@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -35,21 +35,23 @@ export function HoverBorderGradient({
   const [hovered, setHovered] = useState(false);
   const [direction, setDirection] = useState('TOP');
 
-  const rotateDirection = (dir) => {
+  // ✅ Memoize the rotateDirection function
+  const rotateDirection = useCallback((dir) => {
     const index = directions.indexOf(dir);
     return clockwise
       ? directions[(index - 1 + directions.length) % directions.length]
       : directions[(index + 1) % directions.length];
-  };
+  }, [clockwise]);
 
+  // ✅ Include all deps in useEffect
   useEffect(() => {
     if (!hovered) {
       const interval = setInterval(() => {
-        setDirection((prev) => rotateDirection(prev));
+        setDirection(prev => rotateDirection(prev));
       }, duration * 1000);
       return () => clearInterval(interval);
     }
-  }, [hovered]);
+  }, [hovered, rotateDirection, duration]);
 
   const content = (
     <div
