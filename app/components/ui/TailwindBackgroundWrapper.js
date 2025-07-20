@@ -63,7 +63,7 @@ const TailwindBackgroundWrapper = ({ children }) => {
           {showPrev ? (
             <button
               onClick={() => scroll('left')}
-              className="text-white bg-gray-900 px-3 py-1 rounded"
+              className="text-white bg-black px-3 py-1 rounded"
             >
               ‹ Prev
             </button>
@@ -72,7 +72,7 @@ const TailwindBackgroundWrapper = ({ children }) => {
           {showNext ? (
             <button
               onClick={() => scroll('right')}
-              className="text-white bg-gray-900 px-3 py-1 rounded"
+              className="text-white bg-black px-3 py-1 rounded"
             >
               Next ›
             </button>
