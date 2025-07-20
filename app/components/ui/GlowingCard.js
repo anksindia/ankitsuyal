@@ -1,87 +1,97 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import gsap from "gsap";
 
 export const GlowingCard = ({ icon, title, color = "#22d3ee", text }) => {
   const cardRef = useRef(null);
-  const iconWrapperRef = useRef(null);
-  const iconInnerRef = useRef(null); 
-  const [hovered, setHovered] = useState(false);
+  const iconInnerRef = useRef(null);
+  const glowAnimRef = useRef(null);
+  const iconAnimRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
     const el = cardRef.current;
 
-    const glowAnim = gsap.to(el, {
-      backgroundColor: color + "20",
-      duration: 0.4,
+    // Create animation once and pause it
+    glowAnimRef.current = gsap.to(el, {
+      backgroundColor: color + "10",
+      boxShadow: `inset 0 0 60px ${color}`,
+      duration: 0.6,
       ease: "power2.out",
       paused: true,
     });
 
-    const iconAnim = gsap.to(iconInnerRef.current, {
+    iconAnimRef.current = gsap.to(iconInnerRef.current, {
       color: color,
-      fill: color, 
+      fill: color,
       stroke: color,
       duration: 0.4,
       ease: "power2.out",
       paused: true,
     });
 
-    const handleEnter = () => {
-      setHovered(true);
-      glowAnim.play();
-      iconAnim.play();
-    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = entry.isIntersecting;
+        setIsInView(visible);
 
-    const handleLeave = () => {
-      setHovered(false);
-      glowAnim.reverse();
-      iconAnim.reverse();
-    };
+        if (visible && !isHovered) {
+          glowAnimRef.current?.play();
+          iconAnimRef.current?.play();
+        } else {
+          glowAnimRef.current?.reverse();
+          iconAnimRef.current?.reverse();
+        }
+      },
+      { threshold: 0.5 }
+    );
 
-    el.addEventListener("mouseenter", handleEnter);
-    el.addEventListener("mouseleave", handleLeave);
-
+    if (el) observer.observe(el);
     return () => {
-      el.removeEventListener("mouseenter", handleEnter);
-      el.removeEventListener("mouseleave", handleLeave);
+      if (el) observer.unobserve(el);
     };
-  }, [color]);
+  }, [color, isHovered]);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    gsap.to(cardRef.current, {
+      backgroundColor: "#000000",
+      boxShadow: "none",
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+
+    if (isInView) {
+      glowAnimRef.current?.play();
+      iconAnimRef.current?.play();
+    }
+  };
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      viewport={{ once: true }}
-      className="relative w-80 h-60 bg-black/80 border border-gray-700 rounded-2xl p-5 text-white flex flex-col justify-between overflow-hidden shadow-md"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-80 h-60 bg-black border border-gray-700 rounded-2xl p-5 text-white flex flex-col justify-between overflow-hidden transition-all duration-500"
     >
-
-      <motion.div
-        ref={iconWrapperRef}
-        className="absolute top-4 left-4 p-2 rounded-md bg-white/10"
-      >
+      {/* Icon */}
+      <div className="absolute top-4 left-4 p-2 rounded-md bg-white/10">
         <div ref={iconInnerRef} className="text-white">
           {icon}
         </div>
-      </motion.div>
+      </div>
 
+      {/* Content */}
       <div className="flex-1 flex flex-col justify-end">
         <h3 className="text-xl font-bold mb-1">{title}</h3>
         <p className="text-sm text-neutral-300 leading-snug">{text}</p>
       </div>
-
-      
-      <div
-        className="absolute inset-0 rounded-2xl z-[-1] backdrop-blur-md transition-all duration-300"
-        style={{
-          background: hovered ? `${color}40` : "transparent",
-          boxShadow: hovered ? `inset 0 0 40px ${color}` : "none",
-        }}
-      />
-    </motion.div>
+    </div>
   );
 };

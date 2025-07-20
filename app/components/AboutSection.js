@@ -24,6 +24,7 @@ const AboutSection = () => {
     </div>
 
     {/* Glowing Cards */}
+    <div className="flex justify-center">
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2 sm:px-0">
       <GlowingCard
         title="MERN Developer"
@@ -43,6 +44,7 @@ const AboutSection = () => {
         icon={<Gamepad2 className="w-5 h-5 text-blue-400" />}
         color="#60a5fa"
       />
+    </div>
     </div>
 
     {/* Location Section */}
