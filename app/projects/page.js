@@ -163,7 +163,7 @@ const projects = [
 
 const page = () => {
   return (
-    <div>
+    <div className="max-w-screen overflow-hidden">
       <SkillMarquee />
       <div className="ml-0 mr-0 md:ml-28 md:mr-28">
         <TailwindBackgroundWrapper>

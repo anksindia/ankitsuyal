@@ -155,7 +155,7 @@ export default function SkillMarquee() {
 
       {/* Title Section */}
       <div ref={headingContainerRef} className="relative z-30 text-center px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide flex items-center justify-center gap-2">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight flex-wrap tracking-wide flex items-center justify-center gap-2">
           {/* Icon transition */}
           <AnimatePresence mode="wait">
             <motion.span

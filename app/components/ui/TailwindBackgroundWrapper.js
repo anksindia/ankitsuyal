@@ -5,7 +5,8 @@ import React from 'react';
 const TailwindBackgroundWrapper = ({ children }) => {
   return (
     <div
-      className="relative grid grid-cols-[1fr_2.5rem_auto_2.5rem_1fr] grid-rows-[1fr_1px_auto_1px_1fr] 
+      className="relative grid grid-cols-[1fr_1rem_auto_1rem_1fr] sm:grid-cols-[1fr_2.5rem_auto_2.5rem_1fr]
+ grid-rows-[1fr_1px_auto_1px_1fr] 
                  bg-white dark:bg-black
                  [--pattern-fg:rgba(0,0,0,0.05)] dark:[--pattern-fg:rgba(255,255,255,0.07)]"
     >
