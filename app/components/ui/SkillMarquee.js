@@ -1,10 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useEffect, useRef, useState } from "react";
-import { LaptopMinimal } from "lucide-react";
 import gsap from "gsap";
+import {
+  LaptopMinimal,
+  Smartphone,
+  TabletSmartphone,
+} from "lucide-react";
 
 const skillImages = [
   "/assets/skills/python.svg",
@@ -40,6 +44,8 @@ export default function SkillMarquee() {
   const [typedText, setTypedText] = useState("");
   const fullText = "My Builds";
 
+  const [currentIcon, setCurrentIcon] = useState("mobile");
+
   useEffect(() => {
     let currentIndex = 0;
     const interval = setInterval(() => {
@@ -71,26 +77,37 @@ export default function SkillMarquee() {
           delay: 0.5,
         }
       );
-
-      gsap.to(titleRef.current, {
-        backgroundPosition: "100% 50%",
-        duration: 8,
-        ease: "none",
-        repeat: -1,
-      });
     }
   }, []);
 
-  return (
-    <div className="relative overflow-hidden bg-gray-950 text-white min-h-[30vh] sm:min-h-[40vh] md:min-h-[50vh] max-h-[50vh] sm:max-h-[60vh] md:max-h-[70vh] flex items-center justify-center">
+  useEffect(() => {
+    const devices = ["mobile", "tablet", "laptop"];
+    let index = 0;
+    const interval = setInterval(() => {
+      setCurrentIcon(devices[index % devices.length]);
+      index++;
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
-      {/* Top and bottom gradient fade */}
+  const getColorClass = (segment) => {
+    if (currentIcon === "mobile" && segment === "PRO")
+      return "text-transparent bg-clip-text bg-gradient-to-r from-[#00D9F0] to-[#8EC6F8]";
+    if (currentIcon === "tablet" && segment === "J")
+      return "text-transparent bg-clip-text bg-gradient-to-r from-[#FF008C] to-[#9D3DD5]";
+    if (currentIcon === "laptop" && segment === "ECTS")
+      return "text-transparent bg-clip-text bg-gradient-to-r from-[#FEC426] to-[#FF4D41]";
+    return "text-white";
+  };
+
+  return (
+    <div className="relative overflow-hidden bg-gray-950 text-white min-h-[30vh] sm:min-h-[40vh] md:min-h-[50vh] flex items-center justify-center">
+      {/* Gradient overlays */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#000101] to-transparent z-30 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#000101] to-transparent z-30 pointer-events-none" />
 
-      {/* Background + overlay - z-0 only */}
+      {/* Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Scrolling skill icons */}
         <div
           className="flex gap-6"
           style={{
@@ -133,30 +150,60 @@ export default function SkillMarquee() {
             </motion.div>
           ))}
         </div>
-
-        {/* ✅ FIXED: This overlay is scoped to background only */}
         <div className="absolute inset-0 backdrop-blur-sm bg-black/40" />
       </div>
 
-      {/* Title + Subtitle */}
+      {/* Title Section */}
       <div ref={headingContainerRef} className="relative z-30 text-center px-4">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide flex items-center justify-center gap-2">
-          <span className="w-8 h-8 text-transparent bg-gradient-to-r from-gray-700 via-gray-600 to-gray-400 bg-clip-text">
-            <LaptopMinimal className="text-gray-200 w-8 h-8" />
-          </span>
-          <span
-            ref={titleRef}
-            className="inline-block text-white bg-clip-text bg-[length:200%_100%]"
-          >
-            PROJECTS
+          {/* Icon transition */}
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={currentIcon}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5 }}
+              className="w-8 h-8"
+            >
+              {currentIcon === "mobile" && (
+                <Smartphone className="w-8 h-8" color="#00D9F0" />
+              )}
+              {currentIcon === "tablet" && (
+                <TabletSmartphone className="w-8 h-8" color="#FF008C" />
+              )}
+              {currentIcon === "laptop" && (
+                <LaptopMinimal className="w-8 h-8" color="#FEC426" />
+              )}
+            </motion.span>
+          </AnimatePresence>
+
+          {/* Segment colored PROJECTS */}
+          <span ref={titleRef} className="inline-flex gap-0.5">
+            <span className={getColorClass("PRO")}>PRO</span>
+            <span className={getColorClass("J")}>J</span>
+            <span className={getColorClass("ECTS")}>ECTS</span>
           </span>
         </h2>
+
         <p
           ref={subtextRef}
-          className="mt-3 text-sm sm:text-base bg-gradient-to-r from-slate-300 via-gray-400 to-gray-100 bg-clip-text text-transparent opacity-90 tracking-wide"
+          className="mt-3 text-sm sm:text-base tracking-wide relative"
         >
-          {typedText}
+          {/* Glow behind */}
+          <span
+            aria-hidden
+            className="absolute inset-0 text-white blur-sm opacity-40 z-0 animate-pulse pointer-events-none"
+          >
+            {typedText}
+          </span>
+
+          {/* Actual text with gradient */}
+          <span className="relative z-10 bg-gradient-to-r from-slate-300 via-gray-400 to-gray-100 bg-clip-text text-transparent">
+            {typedText}
+          </span>
         </p>
+
       </div>
     </div>
   );
