@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { FaGithub, FaPlay, FaPause, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {
+  FaGithub,
+  FaPlay,
+  FaPause,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
@@ -42,13 +48,17 @@ const ProjectCard = ({ title, description, tech, images = [], sourceCode }) => {
   }, [autoPlay, images]);
 
   const nextImage = () => setCurrentImg((prev) => (prev + 1) % images.length);
-  const prevImage = () => setCurrentImg((prev) => (prev - 1 + images.length) % images.length);
-  const handleMissingLink = () => alert("Sorry, source code link is not available");
+  const prevImage = () =>
+    setCurrentImg((prev) => (prev - 1 + images.length) % images.length);
+  const handleMissingLink = () =>
+    alert("Sorry, source code link is not available");
 
   if (!isClient) return null;
 
   const isLongDesc = description.length > MAX_DESC_LENGTH;
-  const shortDesc = isLongDesc ? description.slice(0, MAX_DESC_LENGTH) + "..." : description;
+  const shortDesc = isLongDesc
+    ? description.slice(0, MAX_DESC_LENGTH) + "..."
+    : description;
 
   return (
     <>
@@ -65,7 +75,9 @@ const ProjectCard = ({ title, description, tech, images = [], sourceCode }) => {
             alt="fullscreen"
             className="max-w-[90vw] max-h-[90vh] object-contain rounded-xl"
           />
-          <div className="absolute top-4 text-sm text-white/60">Click anywhere to close</div>
+          <div className="absolute top-4 text-sm text-white/60">
+            Click anywhere to close
+          </div>
         </div>
       )}
 
@@ -75,8 +87,9 @@ const ProjectCard = ({ title, description, tech, images = [], sourceCode }) => {
         className="bg-black border border-gray-700 p-4 rounded-2xl shadow-xl flex flex-col sm:flex-row 
                    h-auto sm:h-[270px] w-[90vw] sm:w-[700px] max-w-[700px] transition-transform hover:scale-[1.01]"
       >
-        {/* Image Section */}
-        <div className="relative w-full sm:w-[45%] h-44 sm:h-full rounded-xl overflow-hidden group mb-4 sm:mb-0 sm:mr-4">
+        {/* Image Section with Hover Overlay and Buttons */}
+        <div className="relative group w-full sm:w-[45%] h-44 sm:h-full rounded-xl overflow-hidden mb-4 sm:mb-0 sm:mr-4">
+          {/* Image */}
           <Image
             src={images[currentImg]}
             width={400}
@@ -86,17 +99,22 @@ const ProjectCard = ({ title, description, tech, images = [], sourceCode }) => {
             onClick={() => setFullscreen(true)}
           />
 
-          {/* Prev/Next Buttons */}
+          {/* Black Transparent Overlay */}
+          <div className="absolute inset-0 bg-black bg-opacity-10 opacity-0 group-hover:opacity-30 transition-opacity duration-300 rounded-xl" />
+
+          {/* Prev Button */}
           <button
             onClick={prevImage}
-            className="absolute left-2 top-1/2 -translate-y-1/2 hover:bg-black text-yellow-500 p-2 rounded-full invert transition z-10"
+            className="absolute left-2 top-1/2 -translate-y-1/2  text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition z-10"
             title="Previous"
           >
             <FaChevronLeft size={14} />
           </button>
+
+          {/* Next Button */}
           <button
             onClick={nextImage}
-            className="absolute right-2 top-1/2 -translate-y-1/2 hover:bg-black text-blue-500 p-2 rounded-full invert transition z-10"
+            className="absolute right-2 top-1/2 -translate-y-1/2  text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition z-10"
             title="Next"
           >
             <FaChevronRight size={14} />
@@ -105,7 +123,7 @@ const ProjectCard = ({ title, description, tech, images = [], sourceCode }) => {
           {/* Play/Pause Button */}
           <button
             onClick={() => setAutoPlay((prev) => !prev)}
-            className="absolute bottom-2 left-1/2 -translate-x-1/2 invert text-red-500 p-2 rounded-full hover:bg-black transition z-10"
+            className="absolute bottom-2 left-1/2 -translate-x-1/2  text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition z-10"
             title={autoPlay ? "Pause Slideshow" : "Play Slideshow"}
           >
             {autoPlay ? <FaPause size={14} /> : <FaPlay size={14} />}
