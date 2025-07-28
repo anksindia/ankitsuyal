@@ -5,7 +5,7 @@ import { World } from "@/components/ui/Globe";
 import sampleArcs from "@/data/sample-arcs.json";
 
 const globeConfig = {
-  globeColor: "#2C3E50", 
+  globeColor: "#1A2D66", 
   showAtmosphere: true,
   atmosphereColor: " #DDE6EC", 
   atmosphereAltitude: 0.1,
@@ -32,7 +32,7 @@ export const GlobeDemo = ({
   subtitle = "Ping me from anywhere!",
 }) => {
   return (
-    <div className="relative bg-black rounded-2xl overflow-hidden shadow-xl h-[500px] md:h-[600px] w-full">
+    <div className="relative bg-gradient-to-b from-black to-[#0a0a0a] rounded-2xl overflow-hidden shadow-xl h-[500px] md:h-[600px] w-full">
       {/* Text overlay on top of globe */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center p-6 md:p-10 pointer-events-none">
         <h2 className="text-3xl md:text-4xl font-bold text-[#f3f2ed] drop-shadow-lg">
@@ -49,7 +49,7 @@ export const GlobeDemo = ({
       </div>
 
       {/* Optional gradient fade at bottom */}
-      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-b from-transparent to-[#000000] z-20 pointer-events-none" />
+      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-b from-transparent to-[#0000008e] z-20 pointer-events-none" />
     </div>
   );
 };

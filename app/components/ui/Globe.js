@@ -26,7 +26,7 @@ const GlobeInner = ({ globeConfig, data }) => {
   const groupRef = useRef();
   const [initialized, setInitialized] = useState(false);
 
-  // ✅ Memoize defaultProps to avoid dependency warnings
+  //  Memoize defaultProps to avoid dependency warnings
   const defaultProps = useMemo(
     () => ({
       pointSize: 1,
@@ -34,8 +34,8 @@ const GlobeInner = ({ globeConfig, data }) => {
       showAtmosphere: true,
       atmosphereAltitude: 0.1,
       polygonColor: "rgba(255,255,255,0.7)",
-      globeColor: "#1d072e",
-      emissive: "#000000",
+      globeColor: "#2E8B57",
+      emissive: "#2E8B57",
       emissiveIntensity: 0.1,
       shininess: 0.9,
       arcTime: 2000,
@@ -154,7 +154,7 @@ const WebGLRendererConfig = () => {
     gl.setPixelRatio(window.devicePixelRatio);
     gl.setSize(size.width, size.height);
     gl.setClearColor(0xffaaff, 0);
-  }, [gl, size]); // ✅ Fix dependency array
+  }, [gl, size]); //  Fix dependency array
   return null;
 };
 

@@ -165,7 +165,7 @@ const page = () => {
   return (
     <div className="max-w-screen overflow-hidden">
       <SkillMarquee />
-      <div className="ml-0 mr-0 md:ml-28 md:mr-28">
+      <div className="ml-0 mr-0 ">
         <TailwindBackgroundWrapper>
           <div className="flex flex-wrap justify-center gap-6">
             {projects.map((project, index) => (
