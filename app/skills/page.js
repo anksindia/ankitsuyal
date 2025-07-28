@@ -283,7 +283,7 @@ export default function Page() {
             <div className="py-16 px-4 sm:px-8">
                 <TracingBeam className="px-4 sm:px-8">
                     {/* A little about me - New Content */}
-                    <div className="mb-12">
+                    <div className="m-5 mb-12">
                         
                         <p className=" mb-4 leading-relaxed text-white">
                             I build like a MERN dev with my own flavor! While{" "}
