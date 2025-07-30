@@ -164,7 +164,7 @@ const projects = [
 
 const page = () => {
   return (
-     <div>
+     <div className="w-full overflow-x-hidden">
       <SkillMarquee />
       <div>
         <TailwindBackgroundWrapper>
