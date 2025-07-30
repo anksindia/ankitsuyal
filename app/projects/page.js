@@ -5,6 +5,7 @@ import ProjectCard from "@/components/ProjectCard";
 import SkillMarquee from "@/components/ui/SkillMarquee";
 import TailwindBackgroundWrapper from '@/components/ui/TailwindBackgroundWrapper';
 import React from 'react';
+import Image from "next/image";
 
 const projects = [
   {
@@ -163,15 +164,31 @@ const projects = [
 
 const page = () => {
   return (
-    <div className="max-w-screen overflow-hidden">
+    <div>
       <SkillMarquee />
-      <div className="ml-0 mr-0 ">
+      <div>
         <TailwindBackgroundWrapper>
           <div className="flex flex-wrap justify-center gap-6">
             {projects.map((project, index) => (
               <ProjectCard key={index} {...project} />
             ))}
           </div>
+          <div className="text-center py-10 text-gray-500 text-sm flex flex-col items-center">
+  <p className="mb-4">
+    And yup... there's more cooking.
+    <br className="hidden sm:block" />
+    Stay tuned for new drops 
+  </p>
+  <div className="relative w-32 h-32">
+    <Image
+      src="/build.gif"
+      alt="More coming soon"
+      fill
+      className="object-contain rounded-md shadow-md"
+    />
+  </div>
+</div>
+
         </TailwindBackgroundWrapper>
       </div>
     </div>
