@@ -1,10 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
-    <linearGradient id="strokeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00d2ff" />
-      <stop offset="50%" stop-color="#3a7bd5" />
-      <stop offset="100%" stop-color="#00d2ff" />
-    </linearGradient>
     <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="3" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
@@ -15,7 +10,7 @@
     id="mainLogo"
     d="M40,150 L100,30 L160,150 L130,150 L100,80 L70,150 Z"
     fill="none"
-    stroke="url(#strokeGradient)"
+    stroke="white"
     stroke-width="8"
     stroke-linecap="round"
     stroke-linejoin="round"
@@ -26,14 +21,14 @@
   <path 
     d="M60,110 L80,110 M90,110 L140,110"
     fill="none"
-    stroke="url(#strokeGradient)"
+    stroke="white"
     stroke-width="3"
     stroke-dasharray="5,3"
     filter="url(#glow)"
   />
   
   <!-- Binary code detail -->
-  <text x="50" y="180" font-family="monospace" font-size="10" fill="#3a7bd5">
+  <text x="50" y="180" font-family="monospace" font-size="10" fill="white">
     01000001 01101110 01101011 01101001 01110100
   </text>
 </svg>
