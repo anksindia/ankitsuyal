@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { FiExternalLink } from "react-icons/fi";
 import TrueFocus from "@/components/TrueFoucs";
 
-const workPage = () => {
+const WorkPage = () => {
   const screenshots = ["screenshot", "screenshot2", "screenshot3", "screenshot4"];
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -29,14 +29,16 @@ const workPage = () => {
       >
         {/* Heading */}
         <div className="mb-12">
-          <h1 className="text-5xl font-extrabold  mb-4"><TrueFocus
-            sentence="Software Work"
-            manualMode={false}
-            blurAmount={5}
-            borderColor="red"
-            animationDuration={2}
-            pauseBetweenAnimations={1}
-          /></h1>
+          <h1 className="text-5xl font-extrabold mb-4">
+            <TrueFocus
+              sentence="Software Work"
+              manualMode={false}
+              blurAmount={5}
+              borderColor="red"
+              animationDuration={2}
+              pauseBetweenAnimations={1}
+            />
+          </h1>
           <p className="text-lg text-gray-300 max-w-3xl leading-relaxed">
             Here&apos;s a brief overview of my recent work, freelance experience, and academic journey.
           </p>
@@ -73,8 +75,9 @@ const workPage = () => {
               alt={`Screenshot ${index + 1}`}
               width={1200}
               height={800}
-              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${index === activeIndex ? "opacity-100" : "opacity-0"
-                }`}
+              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+                index === activeIndex ? "opacity-100" : "opacity-0"
+              }`}
             />
           ))}
         </div>
@@ -125,4 +128,4 @@ const workPage = () => {
   );
 };
 
-export default workPage;
+export default WorkPage;
