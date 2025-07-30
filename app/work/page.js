@@ -34,7 +34,7 @@ const WorkPage = () => {
               sentence="Software Work"
               manualMode={false}
               blurAmount={5}
-              borderColor="red"
+              borderColor="blue"
               animationDuration={2}
               pauseBetweenAnimations={1}
             />
