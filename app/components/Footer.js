@@ -7,6 +7,9 @@ import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { TfiLink, TfiUnlink } from "react-icons/tfi";
 
+
+const dropOrigins = ["10%", "57%", "85%"];
+
 // Social icons
 const socialLinks = [
   {
@@ -43,7 +46,6 @@ const FrozenButton = ({ text = "Click Me", onClick, className }) => {
     { left: "57%", scaleY: 0.8, height: 14 },
     { left: "85%", scaleY: 0.9, height: 18 },
   ];
-  const dropOrigins = ["10%", "57%", "85%"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,7 +54,7 @@ const FrozenButton = ({ text = "Click Me", onClick, className }) => {
       setTimeout(() => setActiveDrop(null), 1600);
     }, 2400);
     return () => clearInterval(interval);
-  }, []);
+  }, []); 
 
   return (
     <div className="relative inline-block">

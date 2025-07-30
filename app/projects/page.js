@@ -164,7 +164,7 @@ const projects = [
 
 const page = () => {
   return (
-    <div>
+     <div>
       <SkillMarquee />
       <div>
         <TailwindBackgroundWrapper>
@@ -174,21 +174,20 @@ const page = () => {
             ))}
           </div>
           <div className="text-center py-10 text-gray-500 text-sm flex flex-col items-center">
-  <p className="mb-4">
-    And yup... there's more cooking.
-    <br className="hidden sm:block" />
-    Stay tuned for new drops 
-  </p>
-  <div className="relative w-32 h-32">
-    <Image
-      src="/build.gif"
-      alt="More coming soon"
-      fill
-      className="object-contain rounded-md shadow-md"
-    />
-  </div>
-</div>
-
+            <p className="mb-4">
+              And yup... there&apos;s more cooking.
+              <br className="hidden sm:block" />
+              Stay tuned for new drops
+            </p>
+            <div className="relative w-32 h-32">
+              <Image
+                src="/build.gif"
+                alt="More coming soon"
+                fill
+                className="object-contain rounded-md shadow-md"
+              />
+            </div>
+          </div>
         </TailwindBackgroundWrapper>
       </div>
     </div>
