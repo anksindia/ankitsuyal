@@ -4,8 +4,9 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FiExternalLink } from "react-icons/fi";
+import TrueFocus from "@/components/TrueFoucs";
 
-const ExperiencePage = () => {
+const workPage = () => {
   const screenshots = ["screenshot", "screenshot2", "screenshot3", "screenshot4"];
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -16,7 +17,7 @@ const ExperiencePage = () => {
       setActiveIndex((prev) => (prev + 1) % screenshots.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [isPaused, screenshots.length]); // ✅ FIXED
+  }, [isPaused, screenshots.length]);
 
   return (
     <div className="min-h-screen bg-black text-white px-4 md:px-16 py-10 relative">
@@ -28,7 +29,14 @@ const ExperiencePage = () => {
       >
         {/* Heading */}
         <div className="mb-12">
-          <h1 className="text-5xl font-extrabold text-blue-400 mb-4">Experience</h1>
+          <h1 className="text-5xl font-extrabold  mb-4"><TrueFocus
+            sentence="Software Work"
+            manualMode={false}
+            blurAmount={5}
+            borderColor="red"
+            animationDuration={2}
+            pauseBetweenAnimations={1}
+          /></h1>
           <p className="text-lg text-gray-300 max-w-3xl leading-relaxed">
             Here&apos;s a brief overview of my recent work, freelance experience, and academic journey.
           </p>
@@ -65,9 +73,8 @@ const ExperiencePage = () => {
               alt={`Screenshot ${index + 1}`}
               width={1200}
               height={800}
-              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
-                index === activeIndex ? "opacity-100" : "opacity-0"
-              }`}
+              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${index === activeIndex ? "opacity-100" : "opacity-0"
+                }`}
             />
           ))}
         </div>
@@ -88,7 +95,7 @@ const ExperiencePage = () => {
           <h2 className="text-2xl font-semibold text-white">MCA (Master of Computer Applications)</h2>
           <p className="text-gray-400">2024 – Ongoing</p>
           <p className="mt-3 text-gray-300">
-            Currently pursuing an MCA with a focus on web development, software engineering, cloud technologies, and intelligent systems. Actively building personal and academic projects alongside freelance work, while exploring modern tools like Three.js for 3D/webGL experiences and developing real-time applications using cutting-edge tech stacks. Also expanding into Android development using Java/Kotlin and gaining experience in intelligent software systems to build smarter, scalable solutions.
+            Currently pursuing an MCA with a focus on web development, software engineering, cloud technologies, and intelligent systems. Actively building personal and academic projects alongside freelance work, while exploring modern tools like Three.js for 3D/webGL works and developing real-time applications using cutting-edge tech stacks. Also expanding into Android development using Java/Kotlin and gaining work in intelligent software systems to build smarter, scalable solutions.
           </p>
         </div>
 
@@ -118,4 +125,4 @@ const ExperiencePage = () => {
   );
 };
 
-export default ExperiencePage;
+export default workPage;

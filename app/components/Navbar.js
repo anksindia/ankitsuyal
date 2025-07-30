@@ -64,7 +64,7 @@ const Navbar = () => {
             {[
               { label: "Skills", path: "/skills" },
               { label: "Projects", path: "/projects" },
-              { label: "Experience", path: "/experience" },
+              { label: "Work", path: "/work" },
             ].map((item) => (
               <li key={item.path}>
                 <Link
@@ -112,7 +112,7 @@ const Navbar = () => {
               {[
                 { href: "/skills", label: "Skills", icon: <Code2 size={18} /> },
                 { href: "/projects", label: "Projects", icon: <LaptopMinimal size={18} /> },
-                { href: "/experience", label: "Experience", icon: <Briefcase size={18} /> },
+                { href: "/work", label: "work", icon: <Briefcase size={18} /> },
                 { href: "/contact", label: "Contact", icon: <FaEnvelope size={16} /> },
               ].map(({ href, label, icon }) => (
                 <motion.li

@@ -280,10 +280,10 @@ export default function Page() {
     return (
         <div className="bg-[#000101] text-white min-h-screen">
             <TextHoverEffect /> {/* Keep TextHoverEffect */}
-            <div className="py-16 px-4 sm:px-8">
+            <div className="pb-12 px-4 sm:px-8">
                 <TracingBeam className="px-4 sm:px-8">
                     {/* A little about me - New Content */}
-                    <div className="m-5 mb-12">
+                    <div className="mx-5 mb-12">
                         
                         <p className=" mb-4 leading-relaxed text-white">
                             I build like a MERN dev with my own flavor! While{" "}
