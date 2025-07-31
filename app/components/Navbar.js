@@ -3,11 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Code2, Briefcase, LaptopMinimal } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { FaEnvelope } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
+import { GiSkills } from "react-icons/gi";
+import { SiReactos } from "react-icons/si";
+import { GoCodeOfConduct } from "react-icons/go";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -73,9 +76,9 @@ const Navbar = () => {
 
             <ul className="flex flex-col items-center gap-6 text-white text-md w-full">
               {[
-                { href: "/skills", label: "Skills", icon: <Code2 size={24} /> },
-                { href: "/projects", label: "Projects", icon: <LaptopMinimal size={24} /> },
-                { href: "/work", label: "Work", icon: <Briefcase size={24} /> },
+                { href: "/skills", label: "Skills", icon: <GiSkills size={24} /> },
+                { href: "/projects", label: "Projects", icon: <SiReactos size={24} /> },
+                { href: "/work", label: "Work", icon: <GoCodeOfConduct size={24} /> },
                 { href: "/contact", label: "Contact", icon: <FaEnvelope size={22} /> },
               ].map(({ href, label, icon }) => (
                 <motion.li

@@ -6,8 +6,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { TfiLink, TfiUnlink } from "react-icons/tfi";
+import { GiSkills } from "react-icons/gi";
+import { SiReactos } from "react-icons/si";
+import { GoCodeOfConduct } from "react-icons/go";
 
-
+// Drop positions
 const dropOrigins = ["10%", "57%", "85%"];
 
 // Social icons
@@ -38,37 +41,100 @@ const socialLinks = [
   },
 ];
 
-// Inline FrozenButton
+// === INLINE FROZEN BUTTON ===
 const FrozenButton = ({ text = "Click Me", onClick, className }) => {
+  const pathname = usePathname();
+
   const [activeDrop, setActiveDrop] = useState(null);
+  const [gradientIndex, setGradientIndex] = useState(0);
+
+  // Gradient color sets: { background, drop color }
+  const gradients = [
+    {
+      background: "linear-gradient(90deg, #00D9F0 0%, #8EC6F8 100%)",
+      drop: "linear-gradient(180deg, #00D9F0, #8EC6F8)",
+    },
+    {
+      background: "linear-gradient(90deg, #FF008C 0%, #9D3DD5 100%)",
+      drop: "linear-gradient(180deg, #FF008C, #9D3DD5)",
+    },
+    {
+      background: "linear-gradient(90deg, #FEC426 0%, #FF4D41 100%)",
+      drop: "linear-gradient(180deg, #FEC426, #FF4D41)",
+    },
+  ];
+
+
   const frozenDrips = [
     { left: "10%", scaleY: 0.75, height: 24 },
     { left: "57%", scaleY: 0.8, height: 14 },
     { left: "85%", scaleY: 0.9, height: 18 },
   ];
 
+  const pageIcons = {
+    "/": <GiSkills className="text-[17px]" />,
+    "/skills": <SiReactos className="text-[17px]" />,
+    "/projects": <GoCodeOfConduct className="text-[17px]" />,
+    "/work": <FaEnvelope className="text-[17px]" />,
+    // "/contact": <TfiUnlink className="text-[17px]" />,
+  };
+
+  const icon = pageIcons[pathname] || <TfiLink className="text-[17px]" />;
+
   useEffect(() => {
-    const interval = setInterval(() => {
+    const dripInterval = setInterval(() => {
       const random = Math.floor(Math.random() * dropOrigins.length);
       setActiveDrop(dropOrigins[random]);
       setTimeout(() => setActiveDrop(null), 1600);
     }, 2400);
-    return () => clearInterval(interval);
-  }, []); 
+
+    const gradientInterval = setInterval(() => {
+      setGradientIndex((prev) => (prev + 1) % gradients.length);
+    }, 4000);
+
+    return () => {
+      clearInterval(dripInterval);
+      clearInterval(gradientInterval);
+    };
+  }, []);
+
+  const currentGradient = gradients[gradientIndex];
 
   return (
     <div className="relative inline-block">
+      {/* Background transition */}
+      <div className="absolute inset-0 z-0 rounded-md overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 z-0 rounded-md overflow-hidden pointer-events-none">
+          {gradients.map((gradient, index) => (
+            <motion.div
+              key={index}
+              className="absolute inset-0"
+              style={{
+                backgroundImage: gradient.background,
+                opacity: index === gradientIndex ? 1 : 0,
+              }}
+              animate={{
+                opacity: index === gradientIndex ? 1 : 0,
+                transition: {
+                  duration: 1.8, // slower = smoother
+                  ease: [0.4, 0, 0.2, 1], // custom easing (ease-in-out)
+                },
+              }}
+            />
+          ))}
+        </div>
+
+      </div>
+
       <button
         onClick={onClick}
-        className={`group relative z-10 flex items-center gap-2 rounded-md px-5 py-2 font-medium text-black bg-white border border-neutral-300 shadow-sm hover:shadow-md hover:border-black transition-all duration-300 backdrop-blur-md text-sm ${className}`}
+        className={`group relative z-10 flex items-center gap-2 rounded-md px-5 py-2 font-semibold text-white  shadow-md hover:shadow-lg transition-all duration-300 backdrop-blur-sm text-sm ${className}`}
+        style={{ backgroundColor: "transparent" }}
       >
         <span>{text}</span>
-        <span className="relative w-5 h-5 inline-block">
-          <TfiLink className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-0 text-[17px]" />
-          <TfiUnlink className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 text-[17px]" />
-        </span>
+        <span className="relative w-5 h-5 inline-block">{icon}</span>
 
-        {/* Frozen drops */}
+        {/* Gradient drips */}
         {frozenDrips.map((drop, i) => (
           <div
             key={i}
@@ -79,11 +145,16 @@ const FrozenButton = ({ text = "Click Me", onClick, className }) => {
             }}
           >
             <div
-              className="w-2 rounded-b-full bg-white"
-              style={{ height: `${drop.height}px` }}
+              className="w-2 rounded-b-full"
+              style={{
+                height: `${drop.height}px`,
+                backgroundImage: currentGradient.drop,
+              }}
             ></div>
+
+            {/* Curved left and right caps */}
             <svg width="6" height="6" viewBox="0 0 6 6" className="absolute left-full top-0">
-              <path d="M5.4 0H0V5.4C0 2.4 2.4 0 5.4 0Z" className="fill-white" />
+              <path d="M5.4 0H0V5.4C0 2.4 2.4 0 5.4 0Z" className="fill-white opacity-40" />
             </svg>
             <svg
               width="6"
@@ -91,12 +162,13 @@ const FrozenButton = ({ text = "Click Me", onClick, className }) => {
               viewBox="0 0 6 6"
               className="absolute right-full top-0 rotate-90"
             >
-              <path d="M5.4 0H0V5.4C0 2.4 2.4 0 5.4 0Z" className="fill-white" />
+              <path d="M5.4 0H0V5.4C0 2.4 2.4 0 5.4 0Z" className="fill-white opacity-40" />
             </svg>
           </div>
         ))}
       </button>
 
+      {/* Falling Drop */}
       {activeDrop && (
         <motion.svg
           key={activeDrop + Date.now()}
@@ -112,14 +184,29 @@ const FrozenButton = ({ text = "Click Me", onClick, className }) => {
         >
           <path
             d="M12 2C12 2 4 10 4 16C4 20.4 7.6 24 12 24C16.4 24 20 20.4 20 16C20 10 12 2 12 2Z"
-            fill="#ffffff"
+            fill="url(#dropGradient)"
           />
+          <defs>
+            <linearGradient id="dropGradient" x1="0" y1="0" x2="0" y2="1">
+              {(() => {
+                const dropColors = currentGradient.drop.match(/#(?:[0-9a-fA-F]{3}){1,2}/g) || ["#ffffff", "#ffffff"];
+                return (
+                  <>
+                    <stop offset="0%" stopColor={dropColors[0]} />
+                    <stop offset="100%" stopColor={dropColors[1]} />
+                  </>
+                );
+              })()}
+
+            </linearGradient>
+          </defs>
         </motion.svg>
       )}
     </div>
   );
 };
 
+// === FOOTER ===
 export default function Footer() {
   const year = new Date().getFullYear();
   const pathname = usePathname();
@@ -142,7 +229,7 @@ export default function Footer() {
       viewport={{ once: true }}
       className="w-full bg-black pt-6"
     >
-      {/* CTA Button above the footer line */}
+      {/* CTA */}
       {cta && (
         <div className="w-full text-center mb-3">
           <FrozenButton
@@ -153,12 +240,9 @@ export default function Footer() {
         </div>
       )}
 
-      {/* Top border line */}
-      <div className="w-full">
-        <div className="mx-[6vw] h-px bg-gray-700" />
-      </div>
+      <div className="mx-[6vw] h-px bg-gray-700" />
 
-      {/* Footer main content */}
+      {/* Footer base */}
       <div className="w-full px-[6vw] py-4 flex flex-wrap items-center justify-between text-sm text-gray-400 gap-y-2">
         <div className="font-medium tracking-wide">
           © {year} Ankit Suyal
