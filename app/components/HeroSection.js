@@ -47,7 +47,7 @@ const HeroSection = () => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          Hey there,<br className="hidden sm:block" />I'm<br />Ankit Suyal
+          Hey there,<br className="hidden sm:block" />I&apos;m<br />Ankit Suyal
         </motion.h1>
 
         <motion.p
