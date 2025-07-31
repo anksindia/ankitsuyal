@@ -59,7 +59,7 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="fixed top-0 right-0 h-screen w-3/4 bg-gradient-to-br bg-black/50 backdrop-blur-sm p-6 z-[999] md:hidden flex flex-col items-center justify-center space-y-8 shadow-2xl"
+            className="fixed top-0 right-0 h-screen w-2/4 bg-gradient-to-br bg-black/50 backdrop-blur-sm p-6 z-[999] md:hidden flex flex-col items-center justify-center space-y-8 shadow-2xl"
           >
             {/* Close button inside the mobile menu */}
             <button
@@ -71,7 +71,7 @@ const Navbar = () => {
               <X size={32} />
             </button>
 
-            <ul className="flex flex-col items-center gap-6 text-white text-lg w-full">
+            <ul className="flex flex-col items-center gap-6 text-white text-md w-full">
               {[
                 { href: "/skills", label: "Skills", icon: <Code2 size={24} /> },
                 { href: "/projects", label: "Projects", icon: <LaptopMinimal size={24} /> },
@@ -87,7 +87,7 @@ const Navbar = () => {
                   <Link
                     href={href}
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-center border-amber-50 border-2 gap-4 px-6 py-3 bg-black rounded-full transition-all duration-200 hover:shadow-lg w-full"
+                    className="flex items-center justify-center border-amber-50 border-2 gap-4 px-4 py-1 bg-black rounded-full transition-all duration-200 hover:shadow-lg w-fit"
                   >
                     {icon}
                     <span>{label}</span>
