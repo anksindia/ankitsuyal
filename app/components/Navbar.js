@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Code2, Briefcase, LaptopMinimal } from "lucide-react";
 import { FaEnvelope } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
 
@@ -24,23 +24,80 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (menuOpen && menuRef.current) {
-      gsap.fromTo(
-        menuRef.current,
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
-      );
+    if (shrink) {
+      gsap.to(menuRef.current, { width: "55vw", duration: 0.3, ease: "power2.out" });
+    } else {
+      gsap.to(menuRef.current, { width: "80vw", duration: 0.3, ease: "power2.out" });
     }
+  }, [shrink]);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "unset";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [menuOpen]);
 
   return (
     <>
-      {menuOpen && (
-        <div
-          className="fixed inset-0 bg-black/20 backdrop-blur-md z-[998] md:hidden"
-          onClick={() => setMenuOpen(false)}
-        />
-      )}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[998] md:hidden"
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
+
+        {menuOpen && (
+          <motion.div
+            ref={menuRef}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="fixed top-0 right-0 h-screen w-3/4 bg-gradient-to-br bg-black/50 backdrop-blur-sm p-6 z-[999] md:hidden flex flex-col items-center justify-center space-y-8 shadow-2xl"
+          >
+            {/* Close button inside the mobile menu */}
+            <button
+              aria-label="close-menu-btn"
+              type="button"
+              className="absolute top-6 right-6 text-white hover:text-gray-300 active:scale-90 transition-all"
+              onClick={() => setMenuOpen(false)}
+            >
+              <X size={32} />
+            </button>
+
+            <ul className="flex flex-col items-center gap-6 text-white text-lg w-full">
+              {[
+                { href: "/skills", label: "Skills", icon: <Code2 size={24} /> },
+                { href: "/projects", label: "Projects", icon: <LaptopMinimal size={24} /> },
+                { href: "/work", label: "Work", icon: <Briefcase size={24} /> },
+                { href: "/contact", label: "Contact", icon: <FaEnvelope size={22} /> },
+              ].map(({ href, label, icon }) => (
+                <motion.li
+                  key={label}
+                  whileHover={{ scale: 1.05, x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="w-full"
+                >
+                  <Link
+                    href={href}
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center justify-center border-amber-50 border-2 gap-4 px-6 py-3 bg-black rounded-full transition-all duration-200 hover:shadow-lg w-full"
+                  >
+                    {icon}
+                    <span>{label}</span>
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Navbar */}
       <nav
@@ -88,51 +145,18 @@ const Navbar = () => {
             {!shrink && <span className="hidden sm:inline">Contact</span>}
           </Link>
 
-          {/* Mobile Menu Button */}
-          <button
-            aria-label="menu-btn"
-            type="button"
-            className="md:hidden text-white active:scale-90 transition"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X size={30} /> : <Menu size={30} />}
-          </button>
+          {/* Mobile Menu Button (only shows when menu is closed) */}
+          {!menuOpen && (
+            <button
+              aria-label="menu-btn"
+              type="button"
+              className="md:hidden text-white active:scale-90 transition-all"
+              onClick={() => setMenuOpen(true)}
+            >
+              <Menu size={30} />
+            </button>
+          )}
         </div>
-
-        {/* Mobile Menu Dropdown */}
-        {menuOpen && (
-          <motion.div
-            ref={menuRef}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute top-full mt-4 left-0 w-full rounded-xl p-4 z-[999] md:hidden"
-          >
-            <ul className="flex flex-col items-center gap-2 text-white">
-              {[
-                { href: "/skills", label: "Skills", icon: <Code2 size={18} /> },
-                { href: "/projects", label: "Projects", icon: <LaptopMinimal size={18} /> },
-                { href: "/work", label: "work", icon: <Briefcase size={18} /> },
-                { href: "/contact", label: "Contact", icon: <FaEnvelope size={16} /> },
-              ].map(({ href, label, icon }) => (
-                <motion.li
-                  key={label}
-                  whileHover={{ x: 4 }}
-                  className="w-full"
-                >
-                  <Link
-                    href={href}
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-center gap-3 px-5 py-2.5 bg-black/20 backdrop-blur-lg rounded-full transition-all duration-200 hover:bg-black/30 w-full"
-                  >
-                    {icon}
-                    <span>{label}</span>
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
       </nav>
     </>
   );

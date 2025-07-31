@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { motion } from 'framer-motion';
-import { Spotlight } from '@/components/ui/spotlight-new';
 import { HoverBorderGradient } from './ui/HoverBorderGradient';
+import Orb from './ui/Orb';
 
 const HeroSection = () => {
   const headingRef = useRef(null);
@@ -23,33 +23,40 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative min-h-screen text-white flex items-center justify-center px-6 sm:px-8 md:px-10 overflow-hidden bg-gradient-to-b from-[#000101] via-[#000000] to-[#000101]">
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f15_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f15_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] pointer-events-none z-0" />
+
+    <section className="relative w-screen h-screen text-white flex items-center justify-center px-4 sm:px-6 md:px-8 overflow-hidden bg-gradient-to-b from-[#000000] via-[#1A2560] to-[#000000]">
+
+
+      <div className="absolute inset-0 w-full h-full z-0">
+        <Orb
+          hoverIntensity={0.5}
+          rotateOnHover={true}
+          hue={0}
+          forceHoverState={false} // Set to 'true' if you want the hover effect always active, as per the image
+        />
       </div>
 
-      <Spotlight />
-
-      <div className="relative z-10 flex flex-col items-center gap-16 max-w-4xl w-full text-center">
+      {/* Hero Content */}
+      <div className="relative z-10 flex flex-col items-center gap-10 w-full max-w-screen-sm text-center">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, ease: "easeOut" }}
           tabIndex={0}
-          aria-label="Hero headline: Hey there, I&apos;m Ankit Suyal"
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-gray-500 via-gray-600 to-gray-500 bg-clip-text text-transparent animate-text-glow"
+          ref={headingRef}
+          aria-label="Hero headline: Hey there, I'm Ankit Suyal"
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-gray-200 via-blue-200 to-red-200 bg-clip-text text-transparent animate-text-glow"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          Hey there,<br className="hidden sm:block" />I&apos;m<br />Ankit Suyal
+          Hey there,<br className="hidden sm:block" />I'm<br />Ankit Suyal
         </motion.h1>
-
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.8 }}
-          className="text-lg md:text-xl text-gray-400 max-w-xl backdrop-blur-sm"
+          className="text-base sm:text-lg md:text-xl text-gray-200 max-w-md px-2"
         >
           Crafting web apps with the MERN stack, now diving into Android & intelligent systems.
         </motion.p>
@@ -60,7 +67,6 @@ const HeroSection = () => {
           transition={{ delay: 2, duration: 0.5 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="inline-block"
         >
           <HoverBorderGradient as="a" href="/contact">
             Let’s Connect
@@ -68,6 +74,7 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
+      {/* Floating Circles */}
       {floatingCircles.map((circle, i) => (
         <motion.div
           key={i}
