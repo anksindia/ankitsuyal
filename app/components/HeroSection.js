@@ -23,16 +23,14 @@ const HeroSection = () => {
   ];
 
   return (
-
     <section className="relative w-screen h-screen text-white flex items-center justify-center px-4 sm:px-6 md:px-8 overflow-hidden bg-gradient-to-b from-[#000000] via-[#1A2560] to-[#000000]">
-
 
       <div className="absolute inset-0 w-full h-full z-0">
         <Orb
           hoverIntensity={0.5}
           rotateOnHover={true}
           hue={0}
-          forceHoverState={false} // Set to 'true' if you want the hover effect always active, as per the image
+          forceHoverState={false}
         />
       </div>
 
@@ -44,7 +42,7 @@ const HeroSection = () => {
           transition={{ duration: 1.4, ease: "easeOut" }}
           tabIndex={0}
           ref={headingRef}
-          aria-label="Hero headline: Hey there, I'm Ankit Suyal"
+          aria-label="Hero headline: Hey there, I&#39;m Ankit Suyal"
           className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-gray-200 via-blue-200 to-red-200 bg-clip-text text-transparent animate-text-glow"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
