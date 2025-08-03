@@ -1,16 +1,15 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { HoverBorderGradient } from './ui/HoverBorderGradient';
 import Orb from './ui/Orb';
 
 const HeroSection = () => {
-  const headingRef = useRef(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    gsap.from(headingRef.current, { y: 50, opacity: 0, duration: 1.4, ease: 'power3.out' });
+    setIsMounted(true); 
   }, []);
 
   const floatingCircles = [
@@ -22,39 +21,35 @@ const HeroSection = () => {
     { size: 50, top: '20%', left: '80%' },
   ];
 
+  if (!isMounted) return null; 
+
   return (
     <section className="relative w-screen h-screen text-white flex items-center justify-center px-4 sm:px-6 md:px-8 overflow-hidden bg-gradient-to-b from-[#000000] via-[#1A2560] to-[#000000]">
 
-      {/* Orb component for the background effect */}
+      {/* Orb background */}
       <div className="absolute inset-0 w-full h-full z-0">
-        <Orb
-          hoverIntensity={0.5}
-          rotateOnHover={true}
-          hue={0}
-          forceHoverState={false}
-        />
+        <Orb hoverIntensity={0.5} rotateOnHover={true} hue={0} forceHoverState={false} />
       </div>
 
-      {/* Hero Content - make sure this is on a higher z-index */}
+      {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center gap-10 w-full max-w-screen-sm text-center">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, ease: "easeOut" }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
           tabIndex={0}
-          ref={headingRef}
-          aria-label="Hero headline: Hey there, I&#39;m Ankit Suyal"
+          aria-label="Hero headline: Hello World! I&#39;m Ankit Suyal"
           className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-gray-200 via-blue-200 to-red-200 bg-clip-text text-transparent animate-text-glow"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          Hey there,<br className="hidden sm:block" />I&apos;m<br />Ankit Suyal
+          Hello World!<br className="hidden sm:block" />I&apos;m<br />Ankit Suyal
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
           className="text-base sm:text-lg md:text-xl text-gray-200 max-w-md px-2"
         >
           Crafting web apps with the MERN stack, now diving into Android & intelligent systems.
@@ -63,7 +58,7 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 0.5 }}
+          transition={{ delay: 1.5, duration: 0.5 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -73,7 +68,7 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Floating Circles - on top of the Orb but behind the main content */}
+      {/* Floating circles */}
       {floatingCircles.map((circle, i) => (
         <motion.div
           key={i}
