@@ -1,19 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
-import { TfiLink, TfiUnlink } from "react-icons/tfi";
 import { GiSkills } from "react-icons/gi";
 import { SiReactos } from "react-icons/si";
 import { GoCodeOfConduct } from "react-icons/go";
 
-// Drop positions
-const dropOrigins = ["10%", "57%", "85%"];
-
-// Social icons
+// === Social Links ===
 const socialLinks = [
   {
     href: "https://x.com/AnkitSdotcom/",
@@ -41,185 +37,49 @@ const socialLinks = [
   },
 ];
 
-// === INLINE FROZEN BUTTON ===
-const FrozenButton = ({ text = "Click Me", onClick, className }) => {
-  const pathname = usePathname();
+// === Premium Gradient Colors ===
+const gradients = [
+  "from-[#00D9F0] to-[#8EC6F8]",
+  "from-[#FF008C] to-[#9D3DD5]",
+  "from-[#FEC426] to-[#FF4D41]",
+  "from-[#A855F7] to-[#EC4899]",
+];
 
-  const [activeDrop, setActiveDrop] = useState(null);
-  const [gradientIndex, setGradientIndex] = useState(0);
-
-  // Gradient color sets: { background, drop color }
-  const gradients = [
-    {
-      background: "linear-gradient(90deg, #00D9F0 0%, #8EC6F8 100%)",
-      drop: "linear-gradient(180deg, #00D9F0, #8EC6F8)",
-    },
-    {
-      background: "linear-gradient(90deg, #FF008C 0%, #9D3DD5 100%)",
-      drop: "linear-gradient(180deg, #FF008C, #9D3DD5)",
-    },
-    {
-      background: "linear-gradient(90deg, #FEC426 0%, #FF4D41 100%)",
-      drop: "linear-gradient(180deg, #FEC426, #FF4D41)",
-    },
-  ];
-
-
-  const frozenDrips = [
-    { left: "10%", scaleY: 0.75, height: 24 },
-    { left: "57%", scaleY: 0.8, height: 14 },
-    { left: "85%", scaleY: 0.9, height: 18 },
-  ];
-
-  const pageIcons = {
-    "/": <GiSkills className="text-[17px]" />,
-    "/skills": <SiReactos className="text-[17px]" />,
-    "/projects": <GoCodeOfConduct className="text-[17px]" />,
-    "/work": <FaEnvelope className="text-[17px]" />,
-    // "/contact": <TfiUnlink className="text-[17px]" />,
-  };
-
-  const icon = pageIcons[pathname] || <TfiLink className="text-[17px]" />;
-
-  useEffect(() => {
-    const dripInterval = setInterval(() => {
-      const random = Math.floor(Math.random() * dropOrigins.length);
-      setActiveDrop(dropOrigins[random]);
-      setTimeout(() => setActiveDrop(null), 1600);
-    }, 2400);
-
-    const gradientInterval = setInterval(() => {
-      setGradientIndex((prev) => (prev + 1) % gradients.length);
-    }, 4000);
-
-    return () => {
-      clearInterval(dripInterval);
-      clearInterval(gradientInterval);
-    };
-  }, []);
-
-  const currentGradient = gradients[gradientIndex];
-
-  return (
-    <div className="relative inline-block">
-      {/* Background transition */}
-      <div className="absolute inset-0 z-0 rounded-md overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 z-0 rounded-md overflow-hidden pointer-events-none">
-          {gradients.map((gradient, index) => (
-            <motion.div
-              key={index}
-              className="absolute inset-0"
-              style={{
-                backgroundImage: gradient.background,
-                opacity: index === gradientIndex ? 1 : 0,
-              }}
-              animate={{
-                opacity: index === gradientIndex ? 1 : 0,
-                transition: {
-                  duration: 1.8, // slower = smoother
-                  ease: [0.4, 0, 0.2, 1], // custom easing (ease-in-out)
-                },
-              }}
-            />
-          ))}
-        </div>
-
-      </div>
-
-      <button
-        onClick={onClick}
-        className={`group relative z-10 flex items-center gap-2 rounded-md px-5 py-2 font-semibold text-white  shadow-md hover:shadow-lg transition-all duration-300 backdrop-blur-sm text-sm ${className}`}
-        style={{ backgroundColor: "transparent" }}
-      >
-        <span>{text}</span>
-        <span className="relative w-5 h-5 inline-block">{icon}</span>
-
-        {/* Gradient drips */}
-        {frozenDrips.map((drop, i) => (
-          <div
-            key={i}
-            className="absolute top-[99%] origin-top"
-            style={{
-              left: drop.left,
-              transform: `scaleY(${drop.scaleY}) translateZ(0px)`,
-            }}
-          >
-            <div
-              className="w-2 rounded-b-full"
-              style={{
-                height: `${drop.height}px`,
-                backgroundImage: currentGradient.drop,
-              }}
-            ></div>
-
-            {/* Curved left and right caps */}
-            <svg width="6" height="6" viewBox="0 0 6 6" className="absolute left-full top-0">
-              <path d="M5.4 0H0V5.4C0 2.4 2.4 0 5.4 0Z" className="fill-white opacity-40" />
-            </svg>
-            <svg
-              width="6"
-              height="6"
-              viewBox="0 0 6 6"
-              className="absolute right-full top-0 rotate-90"
-            >
-              <path d="M5.4 0H0V5.4C0 2.4 2.4 0 5.4 0Z" className="fill-white opacity-40" />
-            </svg>
-          </div>
-        ))}
-      </button>
-
-      {/* Falling Drop */}
-      {activeDrop && (
-        <motion.svg
-          key={activeDrop + Date.now()}
-          className="absolute z-0"
-          style={{ top: "100%", left: `calc(${activeDrop} - 3px)` }}
-          width="12"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          initial={{ y: 0, opacity: 1, scale: 1 }}
-          animate={{ y: 80, opacity: 0, scale: 0.9 }}
-          transition={{ duration: 1.6, ease: "easeInOut" }}
-        >
-          <path
-            d="M12 2C12 2 4 10 4 16C4 20.4 7.6 24 12 24C16.4 24 20 20.4 20 16C20 10 12 2 12 2Z"
-            fill="url(#dropGradient)"
-          />
-          <defs>
-            <linearGradient id="dropGradient" x1="0" y1="0" x2="0" y2="1">
-              {(() => {
-                const dropColors = currentGradient.drop.match(/#(?:[0-9a-fA-F]{3}){1,2}/g) || ["#ffffff", "#ffffff"];
-                return (
-                  <>
-                    <stop offset="0%" stopColor={dropColors[0]} />
-                    <stop offset="100%" stopColor={dropColors[1]} />
-                  </>
-                );
-              })()}
-
-            </linearGradient>
-          </defs>
-        </motion.svg>
-      )}
-    </div>
-  );
-};
-
-// === FOOTER ===
 export default function Footer() {
-  const year = new Date().getFullYear();
   const pathname = usePathname();
-  const router = useRouter();
+  const year = new Date().getFullYear();
 
-  const ctaMap = {
-    "/": { label: "Explore Skills", href: "/skills" },
-    "/skills": { label: "View Projects", href: "/projects" },
-    "/projects": { label: "See Work Experience", href: "/work" },
-    "/work": { label: "Get in Touch", href: "/contact" },
-  };
+  // === Stepper setup ===
+  const steps = [
+    {
+      label: "Skills",
+      href: "/skills",
+      icon: <GiSkills className="text-xl" />,
+    },
+    {
+      label: "Projects",
+      href: "/projects",
+      icon: <SiReactos className="text-xl" />,
+    },
+    {
+      label: "Work",
+      href: "/work",
+      icon: <GoCodeOfConduct className="text-xl" />,
+    },
+    {
+      label: "Contact",
+      href: "/contact",
+      icon: <FaEnvelope className="text-xl" />,
+    },
+  ];
 
-  const cta = ctaMap[pathname];
+  const stepsWithGradients = steps.map((step, index) => ({
+    ...step,
+    gradient: gradients[index] || "from-gray-400 to-gray-600",
+  }));
+
+  const currentIndex = steps.findIndex((step) => step.href === pathname);
+  const isHomePage = pathname === "/";
 
   return (
     <motion.footer
@@ -227,26 +87,86 @@ export default function Footer() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true }}
-      className="w-full bg-black pt-6"
+      className="w-full bg-black pt-12 pb-6"
     >
-      {/* CTA */}
-      {cta && (
-        <div className="w-full text-center mb-3">
-          <FrozenButton
-            text={cta.label}
-            onClick={() => router.push(cta.href)}
-            className="mx-auto"
-          />
-        </div>
-      )}
+      {/* Stepper Progress UI */}
+      <div className="w-full text-center mb-10 flex flex-col items-center gap-6">
+        <div className="flex items-center justify-center relative w-fit px-[6vw]">
+          {stepsWithGradients.map((step, index) => {
+            const isActive = index === currentIndex;
+            const isCompleted = index < currentIndex;
 
+            return (
+              <React.Fragment key={step.href}>
+                <Link
+                  href={step.href}
+                  className="flex flex-col items-center z-10 transition-transform duration-300 ease-in-out group"
+                >
+                  <motion.div
+                    className={`w-12 h-12 flex items-center justify-center rounded-full border-2 relative overflow-hidden transition-all duration-300 ease-in-out ${
+                      isActive || isCompleted
+                        ? "border-transparent text-white"
+                        : "border-gray-700 text-gray-500"
+                    }`}
+                    whileHover={{ scale: 1.05 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                  >
+                    <div
+                      className={`absolute inset-0 rounded-full bg-gradient-to-br ${
+                        step.gradient
+                      } transition-opacity duration-500 ${
+                        isActive || isCompleted
+                          ? "opacity-100"
+                          : "opacity-0 group-hover:opacity-100"
+                      }`}
+                    />
+                    <div
+                      className={`absolute inset-0 rounded-full bg-black/60 transition-opacity duration-500 ${
+                        isActive ? "opacity-0" : "opacity-100 group-hover:opacity-0"
+                      }`}
+                    />
+                    <span className="relative z-10">{step.icon}</span>
+                  </motion.div>
+                  <span
+                    className={`mt-2 text-sm font-medium tracking-wide transition-colors duration-300 ${
+                      isActive
+                        ? "text-white"
+                        : "text-gray-400 group-hover:text-white"
+                    }`}
+                  >
+                    {step.label}
+                  </span>
+                </Link>
+                {index < steps.length - 1 && (
+                  <motion.div
+                    className="flex-1 h-0.5 bg-gray-800 mx-4 relative"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ delay: index * 0.1 + 0.2, duration: 0.5 }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-gray-700 to-white"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: isCompleted || (isActive && !isHomePage) ? 1 : 0 }}
+                      style={{ originX: 0 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                    />
+                  </motion.div>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Divider */}
       <div className="mx-[6vw] h-px bg-gray-700" />
 
-      {/* Footer base */}
+      {/* Footer Base */}
       <div className="w-full px-[6vw] py-4 flex flex-wrap items-center justify-between text-sm text-gray-400 gap-y-2">
-        <div className="font-medium tracking-wide">
-          © {year} Ankit Suyal
-        </div>
+        <div className="font-medium tracking-wide">© {year} Ankit Suyal</div>
 
         <div className="flex items-center gap-4">
           {socialLinks.map((item, index) => (
