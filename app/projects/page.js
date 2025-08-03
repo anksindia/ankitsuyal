@@ -173,8 +173,8 @@ const page = () => {
               <ProjectCard key={index} {...project} />
             ))}
           </div>
-          <div className="text-center py-10 text-gray-500 text-sm flex flex-col items-center">
-            <p className="mb-4">
+          <div className="text-center text-gray-500 text-sm flex flex-col items-center">
+            <p>
               And yup... there&apos;s more cooking.
               <br className="hidden sm:block" />
               Stay tuned for new drops

@@ -25,6 +25,7 @@ const HeroSection = () => {
   return (
     <section className="relative w-screen h-screen text-white flex items-center justify-center px-4 sm:px-6 md:px-8 overflow-hidden bg-gradient-to-b from-[#000000] via-[#1A2560] to-[#000000]">
 
+      {/* Orb component for the background effect */}
       <div className="absolute inset-0 w-full h-full z-0">
         <Orb
           hoverIntensity={0.5}
@@ -34,7 +35,7 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* Hero Content */}
+      {/* Hero Content - make sure this is on a higher z-index */}
       <div className="relative z-10 flex flex-col items-center gap-10 w-full max-w-screen-sm text-center">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -72,7 +73,7 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Floating Circles */}
+      {/* Floating Circles - on top of the Orb but behind the main content */}
       {floatingCircles.map((circle, i) => (
         <motion.div
           key={i}

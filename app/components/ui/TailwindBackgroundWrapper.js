@@ -15,7 +15,7 @@ const TailwindBackgroundWrapper = ({ children }) => {
     >
       {/* Main content */}
       <div className="col-start-3 row-start-3 w-full">
-        <div className="max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 flex flex-col gap-8">
+        <div className="max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-14 flex flex-col gap-8">
           {React.Children.map(children, (child) => (
             <div className="w-full">{child}</div>
           ))}
