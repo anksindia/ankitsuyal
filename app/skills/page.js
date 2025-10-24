@@ -85,12 +85,12 @@ const frontend = [
         src: "/assets/skills/nextjs.svg",
     },
     {
-    name: "Angular",
-    about: "A TypeScript-based frontend framework developed by Google for building dynamic, single-page web applications with a strong focus on scalability and maintainability.",
-    category: "Frontend - Used in enterprise-level web applications and large-scale single-page applications (SPAs).",
-    src: "/assets/skills/angular.svg",
-}
-,
+        name: "Angular",
+        about: "A TypeScript-based frontend framework developed by Google for building dynamic, single-page web applications with a strong focus on scalability and maintainability.",
+        category: "Frontend - Used in enterprise-level web applications and large-scale single-page applications (SPAs).",
+        src: "/assets/skills/angular.svg",
+    }
+    ,
     {
         name: "Tailwind CSS",
         about: "A utility-first CSS framework for rapid and responsive design.",
@@ -125,11 +125,11 @@ const backend = [
         src: "/assets/skills/express.svg",
     },
     {
-    name: ".NET",
-    about: "A powerful, open-source framework developed by Microsoft for building secure, scalable, and high-performance backend applications across web, desktop, and cloud environments.",
-    category: "Backend - Used to build REST APIs, enterprise applications, and cross-platform web services with C# and the .NET framework.",
-    src: "/assets/skills/dotnet.svg",
-}
+        name: ".NET",
+        about: "A powerful, open-source framework developed by Microsoft for building secure, scalable, and high-performance backend applications across web, desktop, and cloud environments.",
+        category: "Backend - Used to build REST APIs, enterprise applications, and cross-platform web services with C# and the .NET framework.",
+        src: "/assets/skills/dotnet.svg",
+    }
 
 ];
 
@@ -141,11 +141,11 @@ const databases = [
         src: "/assets/skills/mongodb.svg",
     },
     {
-    name: "Microsoft SQL Server",
-    about: "A robust relational database management system developed by Microsoft, designed for high performance, scalability, and secure data storage in enterprise environments.",
-    category: "Databases - Commonly used in enterprise applications for structured data management, analytics, and business intelligence.",
-    src: "/assets/skills/mssql.svg",
-}
+        name: "Microsoft SQL Server",
+        about: "A robust relational database management system developed by Microsoft, designed for high performance, scalability, and secure data storage in enterprise environments.",
+        category: "Databases - Commonly used in enterprise applications for structured data management, analytics, and business intelligence.",
+        src: "/assets/skills/mssql.svg",
+    }
 
 ];
 
@@ -196,11 +196,11 @@ const versionControl = [
         src: "/assets/skills/github.svg",
     },
     {
-    name: "Sourcetree",
-    about: "A free Git and Mercurial client that provides a graphical interface for managing repositories, branches, and commits without using the command line.",
-    category: "Version Control & Collaboration - Used by developers to visualize and manage Git workflows efficiently.",
-    src: "/assets/skills/sourcetree.svg",
-}
+        name: "Sourcetree",
+        about: "A free Git and Mercurial client that provides a graphical interface for managing repositories, branches, and commits without using the command line.",
+        category: "Version Control & Collaboration - Used by developers to visualize and manage Git workflows efficiently.",
+        src: "/assets/skills/sourcetree.svg",
+    }
 
 ];
 
@@ -313,20 +313,22 @@ export default function Page() {
                                 <Image src="/assets/skills/tailwindcss.svg" alt="Tailwind CSS" width={18} height={18} /> Tailwind CSS
                             </span>, I craft clean, responsive UIs that just feel right.
                         </p>
-                        <p className=" mb-4 leading-relaxed text-white">
+                        <p className="mb-4 leading-relaxed text-white">
                             Backend? I switch from{" "}
                             <span className="inline-flex items-center gap-1">
                                 <Image src="/assets/skills/nodejs.svg" alt="Node.js" width={18} height={18} /> Node.js
                             </span>{" "}
                             to{" "}
                             <span className="inline-flex items-center gap-1">
-                                <Image src="/assets/skills/postgresql.svg" alt="PostgreSQL" width={18} height={18} /> PostgreSQL
-                            </span>all managed seamlessly. I deploy with{" "}
+                                <Image src="/assets/skills/mssql.svg" alt="SQL Server" width={18} height={18} /> Microsoft SQL Server
+                            </span>{" "}
+                            all managed seamlessly. I deploy with{" "}
                             <span className="inline-flex items-center gap-1">
                                 <Image src="/assets/skills/vercel.svg" alt="Vercel" width={18} height={18} /> Vercel
                             </span>{" "}
                             because easy, fast, and serverless is my style.
                         </p>
+
                         <p className=" mb-4 leading-relaxed text-white">
                             I version with{" "}
                             <span className="inline-flex items-center gap-1">
