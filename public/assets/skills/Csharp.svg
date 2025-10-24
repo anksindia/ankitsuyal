@@ -1,0 +1,7 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <polygon fill="#9B4F96" points="256,48 456,160 456,352 256,464 56,352 56,160"/>
+  <circle fill="#fff" cx="256" cy="256" r="114"/>
+  <polygon fill="#6D2977" points="256,256 392,180 392,332"/>
+  <circle fill="#9B4F96" cx="256" cy="256" r="72"/>
+  <text x="295" y="287" font-family="Arial, Helvetica, sans-serif" font-size="70" font-weight="bold" fill="#fff" letter-spacing="-5">#</text>
+</svg>

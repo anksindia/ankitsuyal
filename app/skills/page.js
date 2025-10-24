@@ -21,12 +21,6 @@ const languages = [
         src: "/assets/skills/javascript.svg",
     },
     {
-        name: "TypeScript",
-        about: "A strongly typed superset of JavaScript that adds static typing.",
-        category: "Languages - Enhances JavaScript for scalable web development.",
-        src: "/assets/skills/typescript.svg",
-    },
-    {
         name: "Python",
         about: "A high-level programming language used for automation, data science, and backend development.",
         category: "Languages - Widely used in backend systems and data-centric applications.",
@@ -43,6 +37,18 @@ const languages = [
         about: "A foundational procedural programming language widely used in systems programming, embedded systems, and operating system development.",
         category: "Languages - Common in low-level, performance-critical, and hardware-near programming.",
         src: "/assets/skills/c.svg",
+    },
+    {
+        name: "C#",
+        about: "A modern, object-oriented programming language developed by Microsoft, widely used for building Windows applications, web services, and cross-platform software using the .NET framework.",
+        category: "Languages - Common in enterprise software, web and desktop applications, and cross-platform development with .NET.",
+        src: "/assets/skills/Csharp.svg",
+    },
+    {
+        name: "TypeScript",
+        about: "A strongly typed superset of JavaScript that adds static typing.",
+        category: "Languages - Enhances JavaScript for scalable web development.",
+        src: "/assets/skills/typescript.svg",
     },
     {
         name: "SQL",
@@ -79,6 +85,13 @@ const frontend = [
         src: "/assets/skills/nextjs.svg",
     },
     {
+    name: "Angular",
+    about: "A TypeScript-based frontend framework developed by Google for building dynamic, single-page web applications with a strong focus on scalability and maintainability.",
+    category: "Frontend - Used in enterprise-level web applications and large-scale single-page applications (SPAs).",
+    src: "/assets/skills/angular.svg",
+}
+,
+    {
         name: "Tailwind CSS",
         about: "A utility-first CSS framework for rapid and responsive design.",
         category: "Frontend - Popular for modern and maintainable styling.",
@@ -112,11 +125,12 @@ const backend = [
         src: "/assets/skills/express.svg",
     },
     {
-        name: "GraphQL",
-        about: "A query language for APIs enabling flexible and efficient data fetching.",
-        category: "Backend - Preferred for modern API development.",
-        src: "/assets/skills/graphql.svg",
-    }
+    name: ".NET",
+    about: "A powerful, open-source framework developed by Microsoft for building secure, scalable, and high-performance backend applications across web, desktop, and cloud environments.",
+    category: "Backend - Used to build REST APIs, enterprise applications, and cross-platform web services with C# and the .NET framework.",
+    src: "/assets/skills/dotnet.svg",
+}
+
 ];
 
 const databases = [
@@ -127,17 +141,12 @@ const databases = [
         src: "/assets/skills/mongodb.svg",
     },
     {
-        name: "MySQL",
-        about: "A relational database known for speed and reliability.",
-        category: "Databases - Widely used in traditional backend systems.",
-        src: "/assets/skills/mysql.svg",
-    },
-    {
-        name: "PostgreSQL",
-        about: "An advanced open-source relational database with strong standards compliance.",
-        category: "Databases - Preferred for complex queries and data integrity.",
-        src: "/assets/skills/postgresql.svg",
-    }
+    name: "Microsoft SQL Server",
+    about: "A robust relational database management system developed by Microsoft, designed for high performance, scalability, and secure data storage in enterprise environments.",
+    category: "Databases - Commonly used in enterprise applications for structured data management, analytics, and business intelligence.",
+    src: "/assets/skills/mssql.svg",
+}
+
 ];
 
 const cloudDeployment = [
@@ -187,11 +196,12 @@ const versionControl = [
         src: "/assets/skills/github.svg",
     },
     {
-        name: "GitLab",
-        about: "An integrated DevOps platform for Git repositories, CI/CD, and more.",
-        category: "Version Control & Collaboration - Often used in enterprise teams.",
-        src: "/assets/skills/gitlab.svg",
-    }
+    name: "Sourcetree",
+    about: "A free Git and Mercurial client that provides a graphical interface for managing repositories, branches, and commits without using the command line.",
+    category: "Version Control & Collaboration - Used by developers to visualize and manage Git workflows efficiently.",
+    src: "/assets/skills/sourcetree.svg",
+}
+
 ];
 
 const tools = [
@@ -284,7 +294,7 @@ export default function Page() {
                 <TracingBeam className="px-4 sm:px-8">
                     {/* A little about me - New Content */}
                     <div className="mx-5 mb-12">
-                        
+
                         <p className=" mb-4 leading-relaxed text-white">
                             I build like a MERN dev with my own flavor! While{" "}
                             <span className="inline-flex items-center gap-1">
