@@ -56,11 +56,11 @@ export default function Footer() {
       href: "/skills",
       icon: <GiSkills className="text-xl" />,
     },
-    {
-      label: "Projects",
-      href: "/projects",
-      icon: <SiReactos className="text-xl" />,
-    },
+    // {
+    //   label: "Projects",
+    //   href: "/projects",
+    //   icon: <SiReactos className="text-xl" />,
+    // },
     {
       label: "Work",
       href: "/work",

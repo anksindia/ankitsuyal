@@ -77,7 +77,7 @@ const Navbar = () => {
             <ul className="flex flex-col items-center gap-6 text-white text-md w-full">
               {[
                 { href: "/skills", label: "Skills", icon: <GiSkills size={24} /> },
-                { href: "/projects", label: "Projects", icon: <SiReactos size={24} /> },
+                // { href: "/projects", label: "Projects", icon: <SiReactos size={24} /> },
                 { href: "/work", label: "Work", icon: <GoCodeOfConduct size={24} /> },
                 { href: "/contact", label: "Contact", icon: <FaEnvelope size={22} /> },
               ].map(({ href, label, icon }) => (
@@ -123,7 +123,7 @@ const Navbar = () => {
           <ul className="hidden md:flex items-center gap-8 text-white font-medium text-sm">
             {[
               { label: "Skills", path: "/skills" },
-              { label: "Projects", path: "/projects" },
+              // { label: "Projects", path: "/projects" },
               { label: "Work", path: "/work" },
             ].map((item) => (
               <li key={item.path}>

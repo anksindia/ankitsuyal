@@ -1,131 +1,256 @@
-"use client";
+'use client';
 
+
+import ProjectCard from "@/components/ProjectCard";
+import SkillMarquee from "@/components/ui/SkillMarquee";
+import TailwindBackgroundWrapper from '@/components/ui/TailwindBackgroundWrapper';
+import React from 'react';
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { FiExternalLink } from "react-icons/fi";
-import TrueFocus from "@/components/TrueFoucs";
+import { motion } from "framer-motion";
 
-const WorkPage = () => {
-  const screenshots = ["screenshot", "screenshot2", "screenshot3", "screenshot4"];
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+const projects = [
+  {
+    title: "KisanConnect – Farmer-to-Buyer Platform",
+    description:
+      "A farmer to buyer marketplace enabling seller registration, product listings, cart functionality, and secure authentication built to promote local produce and support regional communities.",
+    tech: ["Next.js", "Tailwind CSS", "React Hook Form", "MongoDB", "NextAuth", "Razorpay", "React Toastify"],
+    images: ["/assets/projects/kisanconnet.png", "/assets/projects/kisanconnet1.png", "/assets/projects/kisanconnet2.png", "/assets/projects/kisanconnet3.png"],
+    sourceCode: "https://github.com/anksindia/kisanconnect"
+  },
+  {
+    title: "Class2Career – Your Personal Job Tracker",
+    description:
+      "A beautifully designed application that helps students and job seekers keep track of job applications effortlessly and efficiently.",
+    tech: [
+      "React.js",
+      "Tailwind CSS",
+      "React Router",
+      "React Hot Toast",
+      "Node.js",
+      "Express.js",
+      "MongoDB with Mongoose",
+      "React Context API"
+    ],
+    images: ["/assets/projects/Class2Career.png", "/assets/projects/c2.png", "/assets/projects/Class2Career3.png", "/assets/projects/Class2Career4.png", "/assets/projects/Class2Career5.png"],
+    sourceCode: "https://github.com/anksindia/Class2Career-Your-Personal-Job-Tracker"
+  }
+  ,
+  {
+    title: "CodeForge AI – AI-Powered Code Review",
+    description:
+      "An AI-powered code review and chat assistant that allows users to write, review, and discuss their code seamlessly. Features include a live AI chat, interactive editor, and instant feedback for better coding experiences.",
+    tech: [
+      "React.js",
+      "Tailwind CSS",
+      "PrismJS",
+      "React Markdown",
+      "React Simple Code Editor",
+      "Node.js",
+      "Express.js",
+      "@google/generative-ai",
+      "Vite"
+    ],
+    images: [
+      "/assets/projects/CodeForge-AI.png",
+      "/assets/projects/CodeForge-AI2.png",
+      "/assets/projects/CodeForge-AI3.png"
+    ],
+    sourceCode: "https://github.com/anksindia/CodeForge-AI-Ai-Powered-Code-review"
+  },
+  {
+    title: "Invista – Inventory Management System",
+    description:
+      "A modern inventory and order management system designed for small to mid-sized businesses. It allows product listing, real-time stock tracking, order placement, and detailed reporting  all through a clean and responsive interface.",
+    tech: [
+      "Python",
+      "Flask",
+      "SQLite",
+      "SQLAlchemy",
+      "HTML",
+      "Bootstrap 4",
+      "Custom CSS"
+    ],
+    images: [
+      "/assets/projects/invista.png",
+      "/assets/projects/invista2.png"
+    ],
+    sourceCode: "https://github.com/anksindia/invista-inventory-management-system"
+  }
+  ,
+  {
+    title: "CTM – Cash Transaction Machine",
+    description:
+      "A full-stack ATM simulation web app where users can securely register, manage their profile, and perform real-time banking operations like deposit, withdrawal, and transfers. Designed with a modern, responsive UI and theme switching for a seamless user experience.",
+    tech: [
+      "React.js",
+      "Vite",
+      "Tailwind CSS",
+      "DaisyUI",
+      "Zustand",
+      "React Router DOM",
+      "Axios",
+      "React Hot Toast",
+      "Node.js",
+      "Express.js",
+      "MongoDB with Mongoose",
+      "JWT",
+      "Cloudinary",
+      "Multer",
+      "cookie-parser",
+      "dotenv",
+      "vite-plugin-compression"
+    ],
+    images: [
+      "/assets/projects/CTM.png",
+      "/assets/projects/CTM1.png",
+      "/assets/projects/CTM2.png",
+      "/assets/projects/CTM3.png",
+      "/assets/projects/CTM4.png"
+    ],
+    sourceCode: "https://github.com/anksindia/CTM-Cash-Transaction-Machine"
+  },
+  {
+    title: "Pinterest Clone – MERN Image Sharing App",
+    description:
+      "A full-stack Pinterest-style image sharing app where users can upload, save, and manage pins with authentication and a fully responsive UI. Designed to provide a smooth, modern user experience similar to the original platform.",
+    tech: [
+      "React.js",
+      "Vite",
+      "Tailwind CSS",
+      "React Router DOM",
+      "React Icons",
+      "React Toastify",
+      "React Hot Toast",
+      "Axios",
+      "Node.js",
+      "Express.js",
+      "MongoDB with Mongoose",
+      "JWT",
+      "Cloudinary",
+      "Multer",
+      "dotenv",
+      "cookie-parser",
+      "compression"
+    ],
+    images: [
+      "/assets/projects/pinterest.png",
+      "/assets/projects/pinterest2.png",
+      "/assets/projects/pinterest3.png",
+      "/assets/projects/pinterest4.png",
+      "/assets/projects/pinterest5.png"
+    ],
+    sourceCode: "https://github.com/anksindia/Pinterest-clone"
+  },
+  {
+    title: "AgendaFlow – Todo App",
+    description:
+      "A clean and responsive to-do application to efficiently manage daily tasks with full CRUD support, dark/light theme toggle, and persistent data storage — your minimal and powerful productivity companion.",
+    tech: [
+      "React.js",
+      "Vite",
+      "Tailwind CSS",
+      "JavaScript",
+      "LocalStorage"
+    ],
+    images: [
+      "/assets/projects/agendaflow.png",
+      "/assets/projects/agendaflow2.png",
+      "/assets/projects/agendaflow3.png"
+    ],
+    sourceCode: "https://github.com/anksindia/AgendaFlow-Todo-app"
+  }
 
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % screenshots.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [isPaused, screenshots.length]);
+];
 
+
+const page = () => {
   return (
-    <div className="min-h-screen bg-black text-white px-4 md:px-16 py-10 relative">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="max-w-5xl mx-auto pt-20 md:pt-28"
-      >
-        {/* Heading */}
-        <div className="mb-12">
-          <h1 className="text-5xl font-extrabold mb-4">
-            <TrueFocus
-              sentence="Software Work"
-              manualMode={false}
-              blurAmount={5}
-              borderColor="blue"
-              animationDuration={2}
-              pauseBetweenAnimations={1}
-            />
-          </h1>
-          <p className="text-lg text-gray-300 max-w-3xl leading-relaxed">
-            Here&apos;s a brief overview of my recent work, freelance experience, and academic journey.
-          </p>
-        </div>
+    <div className="w-full overflow-x-hidden">
+      <SkillMarquee />
+      <div>
+        <TailwindBackgroundWrapper>
+          <div className="flex flex-wrap justify-center gap-6">
+            {projects.map((project, index) => (
+              <ProjectCard key={index} {...project} />
+            ))}
+          </div>
 
-        {/* Website Manager */}
-        <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-white">Website Manager</h2>
-          <p className="text-gray-400">Spring Dales School, Almora · Dec 2024 – Present</p>
-          <a
-            href="https://springdalesschoolalmora.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-blue-500 hover:underline text-sm mt-1"
+          {/* School Website Project */}
+          <div className="mb-10 flex items-start justify-between">
+            <div>
+              <h2 className="text-2xl font-semibold text-white">School Website Project</h2>
+              <p className="text-gray-400">Spring Dales School, Almora · Dec 2024</p>
+              <a
+                href="https://springdalesschoolalmora.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-blue-500 hover:underline text-sm mt-1"
+              >
+                springdalesschoolalmora.com <FiExternalLink />
+              </a>
+              <p className="mt-3 text-gray-300">
+                Developed and managed the school’s official website as a WordPress-based project,
+                ensuring CBSE compliance, SEO optimization, and responsive design with regular event
+                and content updates.
+              </p>
+            </div>
+
+            {/* WordPress Logo */}
+            <div className="flex-shrink-0 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+              <img
+                src="/assets/skills/wordpress.svg"
+                alt="WordPress"
+                className="w-6 h-6"
+              />
+            </div>
+          </div>
+
+
+          {/* Digital Presence & Visibility Service */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center text-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8 rounded-xl border border-gray-700 shadow-xl"
           >
-            springdalesschoolalmora.com <FiExternalLink />
-          </a>
-          <p className="mt-3 text-gray-300">
-            Led the full-stack development and management of the school&apos;s official website, with CBSE compliance,
-            SEO optimization, mobile-first design, and ongoing event/content updates.
-          </p>
-        </div>
-
-        {/* Slideshow */}
-        <div
-          className="relative w-full h-64 sm:h-80 md:h-[28rem] rounded-lg overflow-hidden border border-gray-700 mb-16"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          {screenshots.map((img, index) => (
             <Image
-              key={img}
-              src={`/assets/${img}.png`}
-              alt={`Screenshot ${index + 1}`}
-              width={1200}
-              height={800}
-              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
-                index === activeIndex ? "opacity-100" : "opacity-0"
-              }`}
+              src="/assets/google-my-business-logo.svg"
+              alt="Google Business Logo"
+              width={180}
+              height={180}
+              className="mb-4"
             />
-          ))}
-        </div>
+            <h3 className="text-xl font-semibold text-blue-400">Digital Presence & Visibility Support</h3>
+            <p className="text-gray-300 mt-2 max-w-xl">
+              Assisted businesses in building and strengthening their online presence through Google’s ecosystem — including
+              profile optimization, local SEO enhancements, review management, and content updates. Focused on ensuring better
+              online visibility, credibility, and engagement across search platforms.
+            </p>
+          </motion.div>
 
-        {/* Freelance Developer */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-white">Freelance Web Developer</h2>
-          <p className="text-gray-400">Remote · 2023 – Present</p>
-          <p className="mt-3 text-gray-300">
-            Worked with clients to deliver modern, responsive websites and landing pages using Next.js, Tailwind CSS,
-            Framer Motion, and more. Focused on performance, SEO, and scalable design systems. Built portfolios,
-            product sites, and admin panels tailored to client needs.
-          </p>
-        </div>
 
-        {/* MCA Student */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-white">MCA (Master of Computer Applications)</h2>
-          <p className="text-gray-400">2024 – Ongoing</p>
-          <p className="mt-3 text-gray-300">
-            Currently pursuing an MCA with a focus on web development, software engineering, cloud technologies, and intelligent systems. Actively building personal and academic projects alongside freelance work, while exploring modern tools like Three.js for 3D/webGL works and developing real-time applications using cutting-edge tech stacks. Also expanding into Android development using Java/Kotlin and gaining work in intelligent software systems to build smarter, scalable solutions.
-          </p>
-        </div>
 
-        {/* Google Business Profile */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="flex flex-col items-center text-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8 rounded-xl border border-gray-700 shadow-xl"
-        >
-          <Image
-            src="/assets/google-my-business-logo.svg"
-            alt="Google My Business Logo"
-            width={200}
-            height={200}
-            className="mb-4"
-          />
-          <h3 className="text-xl font-semibold text-blue-400">Google Business Profile</h3>
-          <p className="text-gray-300 mt-2 max-w-xl">
-            Optimized and maintained the school’s Google Business listing — increasing search visibility and
-            engagement through timely posts, reviews management, and photo uploads.
-          </p>
-        </motion.div>
-      </motion.div>
+          <div className="text-center text-gray-500 text-sm flex flex-col items-center">
+            <p>
+              And yup... there&apos;s more cooking.
+              <br className="hidden sm:block" />
+              Stay tuned for new drops
+            </p>
+            <div className="relative w-32 h-32">
+              <Image
+                src="/build.gif"
+                alt="More coming soon"
+                fill
+                className="object-contain rounded-md shadow-md"
+              />
+            </div>
+          </div>
+        </TailwindBackgroundWrapper>
+      </div>
     </div>
   );
 };
 
-export default WorkPage;
+export default page;

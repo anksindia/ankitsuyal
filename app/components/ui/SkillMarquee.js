@@ -9,6 +9,7 @@ import {
   Smartphone,
   TabletSmartphone,
 } from "lucide-react";
+import TrueFocus from "../TrueFoucs";
 
 const skillImages = [
   "/assets/skills/python.svg",
@@ -42,7 +43,7 @@ export default function SkillMarquee() {
   const subtextRef = useRef(null);
   const headingContainerRef = useRef(null);
   const [typedText, setTypedText] = useState("");
-  const fullText = "My Builds";
+  const fullText = "From concept to creation";
 
   const [currentIcon, setCurrentIcon] = useState("mobile");
 
@@ -177,13 +178,20 @@ export default function SkillMarquee() {
               )}
             </motion.span>
           </AnimatePresence>
-
+<TrueFocus
+              sentence="My Builds"
+              manualMode={false}
+              blurAmount={5}
+              borderColor="blue"
+              animationDuration={2}
+              pauseBetweenAnimations={1}
+            />
           {/* Segment colored PROJECTS */}
-          <span ref={titleRef} className="inline-flex gap-0.5">
+          {/* <span ref={titleRef} className="inline-flex gap-0.5">
             <span className={getColorClass("PRO")}>PRO</span>
             <span className={getColorClass("J")}>J</span>
             <span className={getColorClass("ECTS")}>ECTS</span>
-          </span>
+          </span> */}
         </h2>
 
         <p
