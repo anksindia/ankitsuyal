@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
 import { GiSkills } from "react-icons/gi";
-import { SiReactos } from "react-icons/si";
+// import { SiReactos } from "react-icons/si";
 import { GoCodeOfConduct } from "react-icons/go";
 
 const Navbar = () => {
