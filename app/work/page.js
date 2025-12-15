@@ -176,6 +176,44 @@ const page = () => {
             ))}
           </div>
 
+
+ {/* Takshila School Website Project */}
+          <div className="mb-10 flex items-start justify-between">
+            <div>
+              <h2 className="text-2xl font-semibold text-white">School Website Project</h2>
+              <p className="text-gray-400">Takshila School · Dec 2025</p>
+
+              <a
+                href="https://www.takshilaedu.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-blue-500 hover:underline text-sm mt-1"
+              >
+                takshilaedu.in <FiExternalLink />
+              </a>
+
+              <p className="mt-3 text-gray-300">
+                Designed and developed the official website for Takshila School using Next.js 15,
+                featuring fully custom components, dynamic routing, and a modern UI with Tailwind CSS.
+                Integrated secure form submissions using Resend API with custom API routes for enquiries
+                and contact messages. Implemented SEO optimization, fast loading architecture, and
+                mobile-responsive layouts, along with automated sitemap generation and performance
+                enhancements for a seamless user experience.
+
+              </p>
+            </div>
+
+            {/* Next.js Logo */}
+            <div className="flex-shrink-0 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+              <img
+                src="/assets/skills/nextjs.svg"
+                alt="Next.js"
+                className="w-7 h-7 invert"
+              />
+            </div>
+          </div>
+
+          
           {/* School Website Project */}
           <div className="mb-10 flex items-start justify-between">
             <div>
@@ -205,6 +243,9 @@ const page = () => {
               />
             </div>
           </div>
+
+         
+
 
 
           {/* Digital Presence & Visibility Service */}
