@@ -295,41 +295,41 @@ export default function Page() {
                     {/* A little about me - New Content */}
                     <div className="mx-5 mb-12">
 
-                        <p className=" mb-4 leading-relaxed text-white">
-                            I build like a MERN dev with my own flavor! While{" "}
-                            <span className="inline-flex items-center gap-1">
-                                <Image src="/assets/skills/mongodb.svg" alt="MongoDB" width={18} height={18} /> MongoDB
-                            </span>{" "}
-                            and{" "}
-                            <span className="inline-flex items-center gap-1">
-                                <Image src="/assets/skills/express.svg" alt="Express" width={18} height={18} /> Express
-                            </span>{" "}
-                            are in the toolkit,{" "}
+                        <p className="mb-4 leading-relaxed text-white">
+                            I build as a Full Stack Engineer with my own flavor. While{" "}
                             <span className="inline-flex items-center gap-1">
                                 <Image src="/assets/skills/nextjs.svg" alt="Next.js" width={18} height={18} /> Next.js
                             </span>{" "}
-                            is my real playground. Paired with{" "}
+                            is my primary playground, I craft clean, responsive, and performance-focused UIs using{" "}
                             <span className="inline-flex items-center gap-1">
                                 <Image src="/assets/skills/tailwindcss.svg" alt="Tailwind CSS" width={18} height={18} /> Tailwind CSS
-                            </span>, I craft clean, responsive UIs that just feel right.
+                            </span>.
                         </p>
+
                         <p className="mb-4 leading-relaxed text-white">
-                            Backend? I switch from{" "}
+                            On the backend, I work with{" "}
+                            <span className="inline-flex items-center gap-1">
+                                <Image src="/assets/skills/dotnet.svg" alt=".NET" width={18} height={18} /> .NET
+                            </span>{" "}
+                            and{" "}
                             <span className="inline-flex items-center gap-1">
                                 <Image src="/assets/skills/nodejs.svg" alt="Node.js" width={18} height={18} /> Node.js
-                            </span>{" "}
-                            to{" "}
+                            </span>, backed by{" "}
                             <span className="inline-flex items-center gap-1">
                                 <Image src="/assets/skills/mssql.svg" alt="SQL Server" width={18} height={18} /> Microsoft SQL Server
                             </span>{" "}
-                            all managed seamlessly. I deploy with{" "}
+                            for reliable and scalable data handling.
+                        </p>
+
+                        <p className="mb-4 leading-relaxed text-white">
+                            I deploy using{" "}
                             <span className="inline-flex items-center gap-1">
                                 <Image src="/assets/skills/vercel.svg" alt="Vercel" width={18} height={18} /> Vercel
                             </span>{" "}
-                            because easy, fast, and serverless is my style.
+                            for fast, modern, and serverless workflows.
                         </p>
 
-                        <p className=" mb-4 leading-relaxed text-white">
+                        <p className="mb-4 leading-relaxed text-white">
                             I version with{" "}
                             <span className="inline-flex items-center gap-1">
                                 <Image src="/assets/skills/git.svg" alt="Git" width={18} height={18} /> Git
@@ -339,12 +339,12 @@ export default function Page() {
                             </span>, design in{" "}
                             <span className="inline-flex items-center gap-1">
                                 <Image src="/assets/skills/figma.svg" alt="Figma" width={18} height={18} /> Figma
-                            </span>, and sometimes even edit with{" "}
+                            </span>, and occasionally edit with{" "}
                             <span className="inline-flex items-center gap-1">
                                 <Image src="/assets/skills/adobe-premiere-pro.svg" alt="Premiere Pro" width={18} height={18} /> Premiere Pro
-                            </span>{" "}
-                            (because why not?).
+                            </span>.
                         </p>
+
                         <p className=" mb-4 leading-relaxed text-white">
                             And yup I code it all inside a cozy, AI-assisted setup.
                         </p>
@@ -352,7 +352,9 @@ export default function Page() {
                             Let’s just say I love building stuff that{" "}
                             <span className="font-bold">works and wows</span>.
                         </p>
+
                     </div>
+
 
                     {/* My Skills Section Title */}
                     <div className="mb-12">

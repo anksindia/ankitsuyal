@@ -45,7 +45,7 @@ const HeroSection = () => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          Hello World!
+          Hello World!{" "}
           <br className="hidden sm:block" />
           I&apos;m
           <br />
@@ -58,7 +58,7 @@ const HeroSection = () => {
           transition={{ delay: 1.2, duration: 0.8 }}
           className="text-base sm:text-lg md:text-xl text-gray-200 max-w-md px-2"
         >
-          Crafting web apps with the MERN stack, now diving into Android & intelligent systems.
+          Developing scalable web applications and exploring Android development with intelligent systems.
         </motion.p>
 
         <motion.div
@@ -126,8 +126,8 @@ export default function Home() {
           <div className="flex justify-center">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2 sm:px-0">
               <GlowingCard
-                title="MERN Developer"
-                text="I’m currently sharpening my skills as a full stack developer, working extensively with the MERN Stack to build real-world applications and solve meaningful problems."
+                title="Software Engineer"
+                text="A Full Stack Engineer passionate about building efficient, scalable, and real-world software solutions."
                 icon={<Code className="w-5 h-5 text-yellow-400" />}
                 color="#FACC15"
               />
