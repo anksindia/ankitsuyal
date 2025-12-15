@@ -166,7 +166,7 @@ const projects = [
 ];
 
 
-const page = () => {
+const Page = () => {
 
   const [activeImage, setActiveImage] = React.useState(null);
 
@@ -266,7 +266,7 @@ const page = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className=" border-t border-gray-800 pt-10" 
+            className=" border-t border-gray-800 pt-10"
           >
             <div className="flex flex-col-reverse md:flex-row md:justify-between md:items-start gap-6">
 
@@ -305,7 +305,9 @@ const page = () => {
                       </li>
                       <li className="flex gap-2 items-start">
                         <FiCheckCircle className="text-green-500 mt-1 min-w-[16px]" />
-                        <span>Achieved top results for "best school in Almora" related searches.</span>
+                        <span>
+                          Achieved top results for &quot;best school in Almora&quot; related searches.
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -419,4 +421,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
